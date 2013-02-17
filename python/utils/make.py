@@ -57,9 +57,29 @@ class make:
 	## do make actions
 	def do_makes(self):
 		printf.status("build ...")
+		
+		# olny list all repos name
+		if self.build_args['-l'] != "":
+			printf.status("only for list !")
+			return 
+
+		# judge build one
+		build_one_flg = 0
+		if self.build_args['-o'] != "":
+			n = len(build_ini.list_of_dict)
+			build_one_flg = 1
+			if int(self.build_args['-o']) > n:
+				printf.error("No project - " + self.build_args['-o'])
+
 		# build all projects
-		for i in build_ini.list_of_dict:
+		n = 0
+		for i in build_ini.list_of_dict:			
 			printf.silence("build project: " + i[glb.project_name])
+			if build_one_flg == 1:
+				n = n + 1
+				if self.build_args['-o'] != str(n):
+					printf.status("no need build!")
+					continue
 			project_path = i[glb.project_path]
 			path.push()
 			path.change(project_path)

@@ -27,7 +27,9 @@ Options:
 -c           make clean
 -m           make
 -i           make install
--x           make others,此参数只能唯一存在
+-x           make others target in Makefile
+-l           list all projects for build
+-o           only make the project: -o [1,2,3 ...]
 default      make clean, make, make install
 ''')
 
@@ -36,14 +38,14 @@ default      make clean, make, make install
 	def build_args(self):
 		printf.status("parse args ...")
 		try:
-			opts, args = getopt.getopt(sys.argv[1:], "hcmix:", ["help"])
+			opts, args = getopt.getopt(sys.argv[1:], "hcmix:lo:", ["help"])
 		except getopt.GetoptError , err:
 			printf.warn(str(err)) # will print something like "option -a not recognized"
 			self.build_usage()
 			sys.exit(1)
 
 		## build参数字典
-		build_args = {'-c':0, '-m':0, '-i':0, '-x':''} # 默认为非法参数
+		build_args = {'-c':0, '-m':0, '-i':0, '-x':'', '-l':'', '-o':''} # 默认为非法参数
 		for o, a in opts:
 			if   o in ("-h", "--help"):
 				self.build_usage()
@@ -56,6 +58,10 @@ default      make clean, make, make install
 				build_args[o] = 1
 			elif o == "-x":
 				build_args[o] = ' '.join(str(n) for n in sys.argv[2:])
+			elif o == "-l":
+				build_args[o] = "true"
+			elif o == "-o":
+				build_args[o] = a
 			else:
 				assert False, "unhandled option"
 				self.build_usage()
@@ -119,10 +125,10 @@ Options:
 		printf.printf(3, "Usage:\n" + "check.py " + "[options]")
 		printf.printf(3, '''
 Options:
--h | --help  print help info
--f           ini file path
+-h | --help  help info
+-f           file path - must
 -l           list all repos
--o           checkout the repos
+-o           only checkout the repos: -o [1,2,3 ...]
 ''')
 
 	#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

@@ -57,8 +57,10 @@ class build_ini:
 			self.list_of_dict.append(dictionary)
 
 		## 打印解析到的数据
+		n = 0
 		for i in self.list_of_dict:
-			printf.silence("\nsection:")
+			n = n + 1
+			printf.silence("\nsection - " + str(n) + ":")
 			for key in i.keys():
 				printf.silence(key + " = " + i[key])
 

@@ -85,13 +85,13 @@ class patch_repos:
 		if _a == 0:
 			printf.silence("执行对源码打上补丁 ...")
 			if self.is_patched() == 1:
-				printf.warn("警告： 源码已打上补丁！")
+				printf.warn("warnning： 源码已打上补丁！")
 				return
 			end_flag = ""
 		else:
 			printf.silence("执行对源码去除补丁 ...")
 			if self.is_patched() == 0:
-				printf.warn("警告： 源码已去除补丁！")
+				printf.warn("warnning： 源码已去除补丁！")
 				return
 			end_flag = " -R"
 
@@ -172,12 +172,12 @@ class patch_repos:
 			printf.silence("patch project: " + i[glb.project_name])
 			# 设置源码路径
 			if not i.has_key(glb.source_path):
-				printf.warn("警告: No source path !")
+				printf.warn("warnning: No source path !")
 				return
 			self.in_path = i[glb.source_path]
 			# 设置补丁路径
 			if not i.has_key(glb.patch_path):
-				printf.warn("警告: No patch path !")
+				printf.warn("warnning: No patch path !")
 				return
 			self.out_path = i[glb.patch_path]
 
@@ -191,7 +191,7 @@ class patch_repos:
 
 			# 读取repos类型
 			if not i.has_key(glb.source_repos):
-				printf.warn("警告: No source repos !")
+				printf.warn("warnning: No source repos !")
 				return
 			# 设置仓库命令
 			self.top_path = self.in_path # 默认为根路径

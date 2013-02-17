@@ -21,6 +21,7 @@ from   utils.check_repos    import check_repos
 def main():
 
 	# start patch
+	printf.reset()
 	time.push(os.path.abspath(__file__))
 
 	# check out the project
