@@ -98,14 +98,17 @@ class make:
 
 			# make clean
 			if self.build_args['-c'] == 1 or action_sum == 0:
+				#printf.pause("make clean ...")
 				self.make_clean(i)
 
 			# make
 			if self.build_args['-m'] == 1 or action_sum == 0:
+				#printf.pause("make ...")
 				self.make(i)
 
 			# make install
 			if self.build_args['-i'] == 1 or action_sum == 0:
+				#printf.pause("make install ...")
 				self.make_install(i)
 
 			path.pop()

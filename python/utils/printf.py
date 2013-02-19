@@ -65,6 +65,13 @@ class printf:
 		os.system("echo -e \\\\033c")
 		return
 
+	## pause
+	def pause(self, message):
+		self.status("Pausing...  (Hit ENTER to continue)")
+		self.status(message)
+		raw_input()
+		return
+
 ## object of class printf
 printf = printf()
 
