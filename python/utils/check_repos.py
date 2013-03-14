@@ -51,7 +51,7 @@ class check_repos:
 		# parse all sections
 		for opts in self.configIni.options("repos"):
 			# name
-			i = opts.split(".")[0]
+			i = opts.split(".repos")[0]
 			# path
 			j = os.path.expandvars(self.configIni.get("path", i + ".path"))
 			# repos
