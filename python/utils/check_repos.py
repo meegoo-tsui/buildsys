@@ -97,6 +97,9 @@ class check_repos:
 			printf.silence(str(cnt) + " - " + i)
 			repos_path = self.dict[i][0] + "/" + i
 			if os.path.isdir(repos_path):
+				if self.check_args['-u'] != "true":
+					printf.silence("action - no update\n")
+					continue
 				printf.silence("action - update\n")
 				path.push()
 				path.change(repos_path)

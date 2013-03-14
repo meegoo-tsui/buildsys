@@ -27,7 +27,7 @@ def main():
 	elif svn_args == "-o":
 		os.system("svn st | grep '^?' | awk '{print $2}'")
 	# Clean all svn repos at current path
-	elif svn_args == "-c":
+	elif svn_args == "-r":
 		current_path = os.getcwd()
 		for r in os.walk(current_path).next()[1]:
 			rev = os.popen("svn info " + r + " | awk '/Revision:/ { print $2 }'").read()
