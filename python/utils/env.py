@@ -16,6 +16,12 @@ from   utils.printf   import printf
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## 环境变量设置功能。
 class env:
+	#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	## The constructor.
+	def __init__(self):
+		self.home = os.environ["HOME"]
+
+	#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	## 得到主机IP
 	def hostip(self):
 		host_ip = ""
@@ -30,6 +36,15 @@ class env:
 		printf.status("Host IP - " + host_ip)
 		return host_ip
 
+	#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	## 得到主机MAC
+	def hostmac(self):
+		import uuid
+		hostmac = ':'.join(['{:02x}'.format((uuid.getnode() >> i) & 0xff) for i in range(0,8*6,8)][::-1])
+		printf.status("Host MAC - " + hostmac)
+		return hostmac
+
+	#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	## 修改env文件，添加内容到文件尾
 	def modify(self, filename, flag, content):
 		# judge
