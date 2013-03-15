@@ -191,7 +191,7 @@ Options:
 			opts, args = getopt.getopt(sys.argv[1:], "hmdobsr", ["help"])
 		except getopt.GetoptError , err:
 			printf.warn(str(err)) # will print something like "option -a not recognized"
-			self.repos_usage()
+			self.repos_usage(repos)
 			sys.exit(1)
 
 		## svn.py或git.py
