@@ -3,6 +3,7 @@ encoding//utils/arg.py=utf-8
 encoding//utils/build_ini.py=utf-8
 encoding//utils/check_repos.py=utf-8
 encoding//utils/cmd.py=utf-8
+encoding//utils/env.py=utf-8
 encoding//utils/glb.py=utf-8
 encoding//utils/make.py=utf-8
 encoding//utils/patch_repos.py=utf-8
