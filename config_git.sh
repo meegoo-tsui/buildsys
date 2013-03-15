@@ -13,3 +13,6 @@ git config --global i18n.logoutputencoding gbk
 git config --global core.fileMode false
 git config --global core.editor vim
 
+# global ignore
+git config --global core.excludesfile '~/.gitignore'
+
