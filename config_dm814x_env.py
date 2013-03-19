@@ -29,6 +29,7 @@ env_flag = "# Configure dm814x dev ENV"
 env_content = \
   "\n#" + ">"*79 + "\n" + env_flag + "\n" + \
   "export EXE_INSTALL="   + env.home + "/install\n" + \
+  "export SERVER_IP=192.168.1.10\n" + \
   "export TFTPBOOT=$EXE_INSTALL/tftpboot\n" + \
   "export NFSBOOT=$EXE_INSTALL/nfsboot\n" + \
   "export DM814X_DEV=" + env.home + "/workspace/aee/dm814x-dev.git\n" + \
