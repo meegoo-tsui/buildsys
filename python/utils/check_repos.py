@@ -103,7 +103,10 @@ class check_repos:
 				printf.silence("action - update\n")
 				path.push()
 				path.change(repos_path)
-				if self.dict[i][1].find("git clone") != -1:
+				if self.dict[i][1].find("--mirror") != -1:
+					printf.silence("git clone --mirror")
+					cmd.do("git remote update")
+				elif self.dict[i][1].find("git clone") != -1:
 					printf.silence("git repos")
 					cmd.do("git reset --hard")
 					cmd.do("git pull")

@@ -21,6 +21,7 @@ env_file = os.path.expandvars("$HOME/.bashrc")
 env_flag = "# Configure buildsys ENV"
 ## 添加内容。
 env_content = "\n#" + ">"*79 + "\n" + env_flag + "\n" + \
+"export WORKSPACE=$HOME/workspace\n" + \
 "export BUILD_SYS_PATH="  + os.path.expandvars("$BUILD_SYS_PATH") + \
 '''
 if [ -f $BUILD_SYS_PATH/env/.env ] ; then
