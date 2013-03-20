@@ -118,7 +118,7 @@ def main():
 				if(info != ""):
 					printf.silence("-o:")
 					printf.printf(3, info)
-
+				cmd.do("git status")
 				path.change(current_path)		
 
 	#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
