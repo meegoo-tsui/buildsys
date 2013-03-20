@@ -238,5 +238,42 @@ Options:
 				links_args[o] = a
 		return links_args
 
+	#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	## mk_chk_ini.py help info
+	def mk_chk_ini_usage(self):
+		printf.printf(3, "Usage:\n" + "mk_chk_ini.py " + "[options]")
+		printf.printf(3, '''
+Options:
+-h | --help  print help info
+-p           path for git repos(folder)
+-f           output file
+-m           clone at mirror(default normal clone)
+''')
+
+	#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	## mk_chk_ini.py args
+	def mk_chk_ini_args(self):
+		try:
+			opts, args = getopt.getopt(sys.argv[1:], "hp:f:m", ["help"])
+		except getopt.GetoptError , err:
+			printf.warn(str(err)) # will print something like "option -a not recognized"
+			self.mk_chk_ini_usage()
+			sys.exit(1)
+
+		mk_chk_ini_args = {'-p':'', '-f':'', '-m':''} # 默认为非法参数
+		for o, a in opts:
+			if   o in ("-h", "--help"):
+				self.mk_chk_ini_usage()
+				sys.exit(1)
+			elif o == "-m":
+				mk_chk_ini_args[o] = "true"
+			else:
+				mk_chk_ini_args[o] = a
+		if mk_chk_ini_args['-p'] == "" or mk_chk_ini_args['-f'] == "":
+			self.mk_chk_ini_usage()
+			sys.exit(1)		
+		return mk_chk_ini_args
+	
+	#---------------------------------------------------------------------------
 ## arg对象。
 arg = arg()
