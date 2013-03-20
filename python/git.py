@@ -43,17 +43,21 @@ def revert():
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## main function.
 def main():
-
 	git_args = arg.repos_args("git")
-	if git_args == "-m":
+	
+	if git_args['-p'] != "":
+		path.push()
+		path.change(git_args['-p'])
+
+	if git_args['-m'] == "true":
 		os.system("git status -s | grep '^ M' | awk '{print $2}'")
-	elif git_args == "-d":
+	elif git_args['-d'] == "true":
 		os.system("git status -s | grep '^ D' | awk '{print $2}'")
-	elif git_args == "-o":
+	elif git_args['-o'] == "true":
 		os.system("git status -s | grep '^??' | awk '{print $2}'")
 	
 	#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
-	elif git_args == "-b":
+	elif git_args['-b'] == "true":
 		printf.reset()
 		printf.status("repos backup")
 		current_path = os.getcwd()
@@ -78,7 +82,7 @@ def main():
 					cmd.do("tar -jcf " + tar + " " + r)
 
 	#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	elif git_args == "-s":
+	elif git_args['-s'] == "true":
 		printf.reset()
 		printf.status("repos status")
 		current_path = os.getcwd()
@@ -122,7 +126,7 @@ def main():
 				path.change(current_path)		
 
 	#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	elif git_args == "-r":
+	elif git_args['-r'] == "true":
 		printf.reset()
 		printf.status("repos revert")
 		current_path = os.getcwd()
@@ -138,6 +142,8 @@ def main():
 				path.change(current_path)
 				n = n + 1
 
+	if git_args['-p'] != "":
+		path.pop()
 	sys.exit(0)
 
 if __name__ == '__main__':

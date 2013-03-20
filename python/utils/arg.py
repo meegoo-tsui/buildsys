@@ -182,26 +182,29 @@ Options:
 -b           backup all repost
 -s           repos status
 -r           revert repos
+-p           Path name (folder)
 ''')
 
 	#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	## 工具svn.py或git.py的解析参数。
 	def repos_args(self, repos):
 		try:
-			opts, args = getopt.getopt(sys.argv[1:], "hmdobsr", ["help"])
+			opts, args = getopt.getopt(sys.argv[1:], "hmdobsrp:", ["help"])
 		except getopt.GetoptError , err:
 			printf.warn(str(err)) # will print something like "option -a not recognized"
 			self.repos_usage(repos)
 			sys.exit(1)
 
 		## svn.py或git.py
-		repos_args = ""
+		repos_args = {'-m':'', '-d':'' , '-o':'', '-b':'', '-s':'', '-r':'', '-p':''} # 默认为非法参数
 		for o, a in opts:
 			if   o in ("-h", "--help"):
 				self.repos_usage(repos)
 				sys.exit(1)
+			elif o == "-p":
+				repos_args[o] = a
 			else:
-				repos_args = o
+				repos_args[o] = "true"
 
 		return repos_args
 

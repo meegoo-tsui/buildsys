@@ -14,20 +14,25 @@ import os, sys
 from   utils.printf         import printf
 from   utils.arg            import arg
 from   utils.cmd            import cmd
+from   utils.path           import path
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## main function.
 def main():
-
 	svn_args = arg.repos_args("svn")
-	if svn_args == "-m":
+
+	if svn_args['-p'] != "":
+		path.push()
+		path.change(svn_args['-p'])	
+	
+	if svn_args['-m'] == "true":
 		os.system("svn st | grep '^M' | awk '{print $2}'")
-	elif svn_args == "-d":
+	elif svn_args['-d'] == "true":
 		os.system("svn st | grep '^!' | awk '{print $2}'")
-	elif svn_args == "-o":
+	elif svn_args['-o'] == "true":
 		os.system("svn st | grep '^?' | awk '{print $2}'")
 	# Clean all svn repos at current path
-	elif svn_args == "-r":
+	elif svn_args['-r'] == "true":
 		current_path = os.getcwd()
 		for r in os.walk(current_path).next()[1]:
 			rev = os.popen("svn info " + r + " | awk '/Revision:/ { print $2 }'").read()
@@ -38,7 +43,7 @@ def main():
 			cmd.tryit("find "   + r + " -name \"*.o\" | xargs rm -f")
 			cmd.tryit("svn up " + r)
 	# backup all svn repos at current path
-	elif svn_args == "-b":
+	elif svn_args['-b'] == "true":
 		current_path = os.getcwd()
 		for r in os.walk(current_path).next()[1]:
 			rev = os.popen("svn info " + r + " | awk '/Revision:/ { print $2 }'").read()
@@ -48,6 +53,8 @@ def main():
 		printf.status("svn info")
 		os.system("svn info")
 
+	if svn_args['-p'] != "":
+		path.pop()
 	sys.exit(0)
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
