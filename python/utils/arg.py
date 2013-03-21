@@ -273,6 +273,43 @@ Options:
 			self.mk_chk_ini_usage()
 			sys.exit(1)		
 		return mk_chk_ini_args
+
+	#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	## git_add_remote.py help info
+	def git_add_remote_usage(self):
+		printf.printf(3, "Usage:\n" + "git_add_remote.py " + "[options]")
+		printf.printf(3, '''
+Options:
+-h | --help  print help info
+-u           new url
+-p           print ini
+example:
+	git_add_remote.py -u 192.168.1.10:github/
+''')
+
+	#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	## git_add_remote.py args
+	def git_add_remote_args(self):
+		try:
+			opts, args = getopt.getopt(sys.argv[1:], "hu:p", ["help"])
+		except getopt.GetoptError , err:
+			printf.warn(str(err)) # will print something like "option -a not recognized"
+			self.git_add_remote_usage()
+			sys.exit(1)
+
+		git_add_remote_args = {'-u':'', '-p':''} # 默认为非法参数
+		for o, a in opts:
+			if   o in ("-h", "--help"):
+				self.git_add_remote_usage()
+				sys.exit(1)
+			elif o == "-u":
+				git_add_remote_args[o] = a
+			elif o == "-p":
+				git_add_remote_args[o] = "true"
+		if git_add_remote_args['-u'] == "":
+			self.git_add_remote_usage()
+			sys.exit(1)		
+		return git_add_remote_args
 	
 	#---------------------------------------------------------------------------
 ## arg对象。

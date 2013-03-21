@@ -14,9 +14,9 @@ if [ ! -f .git/config.bak ]; then
 fi
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-if [ $# != 2 ]; then
+if [ $# != 1 ]; then
 	print_color.sh -g "Usage:"
-	print_color.sh -g "$0 192.168.1.10 qt.git"
+	print_color.sh -g "$0 192.168.1.10:qt.git"
 	exit 1
 fi
 
@@ -25,7 +25,7 @@ for remote in `git config -l | grep ^remote.local`; do
 	print_color.sh -g $remote
 done
 if [ "$remote" == "" ]; then
-	git remote add local git@$1:$2
+	git remote add local git@$1
 fi
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
