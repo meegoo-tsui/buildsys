@@ -26,11 +26,11 @@ def main():
 		path.change(svn_args['-p'])	
 	
 	if svn_args['-m'] == "true":
-		os.system("svn st | grep '^M' | awk '{print $2}'")
+		os.system("svn st --no-ignore | grep '^M' | awk '{print $2}'")
 	elif svn_args['-d'] == "true":
-		os.system("svn st | grep '^!' | awk '{print $2}'")
+		os.system("svn st --no-ignore | grep '^!' | awk '{print $2}'")
 	elif svn_args['-o'] == "true":
-		os.system("svn st | grep '^?' | awk '{print $2}'")
+		os.system("svn st --no-ignore | grep '^?' | awk '{print $2}'")
 	# Clean all svn repos at current path
 	elif svn_args['-r'] == "true":
 		current_path = os.getcwd()
@@ -38,8 +38,8 @@ def main():
 			rev = os.popen("svn info " + r + " | awk '/Revision:/ { print $2 }'").read()
 			rev = "-svn" + rev.split("\n")[0]			
 			# patch backup
-			cmd.tryit("svn st " + r + " | grep '^M' | awk '{print $2}' | xargs svn revert ")
-			cmd.tryit("svn st " + r + " | grep '^?' | awk '{print $2}' | xargs rm -rf ")
+			cmd.tryit("svn st --no-ignore " + r + " | grep '^M' | awk '{print $2}' | xargs svn revert ")
+			cmd.tryit("svn st --no-ignore " + r + " | grep '^?' | awk '{print $2}' | xargs rm -rf ")
 			cmd.tryit("find "   + r + " -name \"*.o\" | xargs rm -f")
 			cmd.tryit("svn up " + r)
 	# backup all svn repos at current path
