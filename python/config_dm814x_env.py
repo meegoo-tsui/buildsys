@@ -33,6 +33,7 @@ env_content = \
   "export TFTPBOOT=$EXE_INSTALL/tftpboot\n" + \
   "export NFSBOOT=$EXE_INSTALL/nfsboot\n" + \
   "export DM814X_DEV=" + env.home + "/workspace/local/dm814x-dev.git\n" + \
+  "export EZSDKREV=dm814x-ezsdk5.5.2.0\n" + \
   "export PATH=$DM814X_DEV/bin:$PATH\n" + \
   "export TARGET_NAME=dm8148\n" + \
   "export TARGET_PROMPT=TI8148_EVM#\n" + \
