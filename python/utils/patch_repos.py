@@ -169,7 +169,7 @@ class patch_repos:
 		# patch all projects
 		for i in build_ini.list_of_dict:
 			# 只为当前使用的section执行补丁动作
-			if self.patch_args.has_key("-o"):
+			if self.patch_args.has_key("-o") and self.patch_args['-o'] != "":
 				if i[glb.project_name] != self.patch_args["-o"]:
 					continue
 
