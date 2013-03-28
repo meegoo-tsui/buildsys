@@ -83,7 +83,7 @@ def main():
 
 	#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	elif git_args['-s'] == "true":
-		printf.reset()
+		#printf.reset()
 		printf.status("repos status")
 		current_path = os.getcwd()
 		if(os.path.exists(".git")):
