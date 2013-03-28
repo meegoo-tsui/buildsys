@@ -82,6 +82,8 @@ Options:
              1 - undo patch
              2 - create patch
 -u           patch for untrack files, default without it
+-l           list all projects for patch
+-o           only patch the project: -o [1,2,3 ...]
 ''')
 
 	#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -89,14 +91,14 @@ Options:
 	def patch_args(self):
 		printf.status("parse args ...")
 		try:
-			opts, args = getopt.getopt(sys.argv[1:], "hf:a:u", ["help"])
+			opts, args = getopt.getopt(sys.argv[1:], "hf:a:ulo:", ["help"])
 		except getopt.GetoptError , err:
 			printf.warn(str(err)) # will print something like "option -a not recognized"
 			self.patch_usage()
 			sys.exit(1)
 
 		## patch参数字典，ini路径、patch动作
-		patch_args = {'-f':'', '-a':-1, '-u':0} # 默认为非法参数
+		patch_args = {'-f':'', '-a':-1, '-u':0, '-l':'', '-o':''} # 默认为非法参数
 		for o, a in opts:
 			if   o in ("-h", "--help"):
 				self.patch_usage()
@@ -107,13 +109,17 @@ Options:
 				patch_args[o] = int(a)
 			elif o == "-u":
 				patch_args[o] = 1 # 需要对非托管文件打补丁
+			elif o == "-l":
+				patch_args[o] = "true"
+			elif o == "-o":
+				patch_args[o] = a
 			else:
 				assert False, "unhandled option"
 				self.patch_usage()
 				sys.exit(1)
 
 		# 判断参数
-		if patch_args['-a'] < 0 or patch_args['-f'] == "":
+		if (patch_args['-a'] < 0 and patch_args['-l'] == "") or patch_args['-f'] == "":
 			self.patch_usage()
 			sys.exit(1)
 

@@ -160,11 +160,17 @@ class patch_repos:
 		global patch_cmd
 
 		printf.status("patch ...")
+		# olny list all repos name
+		if self.patch_args.has_key("-l"):
+			if self.patch_args['-l'] != "":
+				printf.status("only for list !")
+				return 
+
 		# patch all projects
 		for i in build_ini.list_of_dict:
 			# 只为当前使用的section执行补丁动作
-			if self.patch_args.has_key("-p"):
-				if i[glb.project_name] != self.patch_args["-p"]:
+			if self.patch_args.has_key("-o"):
+				if i[glb.project_name] != self.patch_args["-o"]:
 					continue
 
 			# 保存当前section的ini参数
