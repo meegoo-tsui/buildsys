@@ -167,10 +167,13 @@ class patch_repos:
 				return 
 
 		# patch all projects
+		n = 0
 		for i in build_ini.list_of_dict:
 			# 只为当前使用的section执行补丁动作
+			n = n + 1
 			if self.patch_args.has_key("-o") and self.patch_args['-o'] != "":
-				if i[glb.project_name] != self.patch_args["-o"]:
+				if self.patch_args['-o'] != str(n):
+					printf.status("no need patch!")
 					continue
 
 			# 保存当前section的ini参数
