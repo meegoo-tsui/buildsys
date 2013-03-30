@@ -73,10 +73,10 @@ class make:
 
 		# build all projects
 		n = 0
-		for i in build_ini.list_of_dict:			
+		for i in build_ini.list_of_dict:
+			n = n + 1			
 			printf.silence("build project: " + i[glb.project_name])
 			if build_one_flg == 1:
-				n = n + 1
 				if self.build_args['-o'] != str(n):
 					printf.status("no need build!")
 					continue
@@ -88,7 +88,7 @@ class make:
 			action_sum = self.build_args['-c'] + self.build_args['-m'] + self.build_args['-i']
 			
 			# 执行相关make动作之前，先打上补丁
-			patch_repos.patch_args = {"-f":build_ini.ini, "-o": i[glb.project_name], "-a":0}
+			patch_repos.patch_args = {"-f":build_ini.ini, "-o": str(n), "-a":0} # 发送标号，从1开始
 			patch_repos.do_patch()
 			
 			# make others, 执行完后返回
