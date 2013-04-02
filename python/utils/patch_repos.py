@@ -81,7 +81,8 @@ class patch_repos:
 	## 0 - 打上补丁， 1 - 去除补丁
 	def patch(self, _a):
 		global patch_cmd
-
+		patch_cnt = 0
+		
 		if _a == 0:
 			printf.silence("执行对源码打上补丁 ...")
 			if self.is_patched() == 1:
@@ -105,17 +106,22 @@ class patch_repos:
 				level = self.cmd_git['level']
 			else:
 				level = patch_cmd['level']
+			patch_cnt = patch_cnt + 1
 			cmd.do("patch -d " + self.top_path + level + i + end_flag)
 
-		# 完成
-		self.create_flag(not _a) # 标志文件处理
-		printf.status("补丁操作完成。")
+		# 完成操作退出
+		printf.status("Total patch: " + str(patch_cnt))
+		if patch_cnt == 0 and _a == 0:
+			self.create_flag(0)
+		else:
+			self.create_flag(not _a)
 
 	#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	## 生成补丁
 	def patch_new(self):
 		global patch_cmd
 		printf.silence("源码生成补丁 ...")
+		patch_cnt = 0
 		# 备份以前存在的补丁
 		if os.path.isdir(self.out_path):
 			patch_list_old = []
@@ -139,6 +145,7 @@ class patch_repos:
 		for i in patch_list:
 			if i == "":
 				continue
+			patch_cnt = patch_cnt + 1
 			name = self.out_path + "/" + self.ini_args[glb.source_repos] + "-" + i.replace("/","_")
 			cmd.do(patch_cmd['diff'] + " " + i + " > " + name + glb.patch_filetype)
 
@@ -148,11 +155,16 @@ class patch_repos:
 		for i in patch_list:
 			if i == "" or i.find(glb.patch_flag) != -1:
 				continue
+			patch_cnt = patch_cnt + 1
 			name = self.out_path + "/" + "git-" + i.replace("/","_")
 			cmd.tryit("git diff /dev/null " + i + " > " + name + glb.patch_filetype)
 
 		# 完成操作退出
-		self.create_flag(1)
+		printf.status("Total patch: " + str(patch_cnt))
+		if patch_cnt != 0:
+			self.create_flag(1)
+		else:
+			self.create_flag(0)
 
 	#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	## 执行补丁动作
