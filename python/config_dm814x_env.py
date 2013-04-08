@@ -29,11 +29,12 @@ env_flag = "# Configure dm814x dev ENV"
 env_content = \
   "\n#" + ">"*79 + "\n" + env_flag + "\n" + \
   "export EXE_INSTALL="   + env.home + "/install\n" + \
-  "export SERVER_IP=192.168.1.10\n" + \
-  "export TFTPBOOT=$EXE_INSTALL/tftpboot\n" + \
+  "export SERVER_IP=192.168.1.10 # git和svn托管服务器\n" + \
+  "export TFTPBOOT=/tftpboot\n" + \
   "export NFSBOOT=$EXE_INSTALL/nfsboot\n" + \
   "export DM814X_DEV=" + env.home + "/workspace/local/dm814x-dev.git\n" + \
   "export EZSDKREV=dm814x-ezsdk5.5.2.0\n" + \
+  "export PSPREV=04.04.00.02\n" + \
   "export PATH=$DM814X_DEV/bin:$PATH\n" + \
   "export TARGET_NAME=dm8148\n" + \
   "export TARGET_PROMPT=TI8148_EVM#\n" + \

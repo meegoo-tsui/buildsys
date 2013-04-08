@@ -42,8 +42,8 @@ class patch_repos:
 		self.action     = 0
 		## git补丁命令
 		self.cmd_git    = {
-						    "list_modify":  "git ls-files -m", # 此命令仅显示当前目录下情况
-						    "list_untrack": "git ls-files -o", # 此命令仅显示当前目录下情况
+						    "list_modify":  "git status . -s | grep '^ M' | awk '{print $2}'", # 此命令仅显示当前目录下情况
+						    "list_untrack": "git status . -s | grep '^??' | awk '{print $2}'", # 此命令仅显示当前目录下情况
 						    "diff":         "git diff",
 						    "level":        "  -p1 <  "
 						  }
