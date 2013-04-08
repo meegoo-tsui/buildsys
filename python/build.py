@@ -27,7 +27,10 @@ def main():
 
 	# build the project
 	make.build_args  = arg.build_args()
-	ini = os.getcwd() + "/" + glb.build_ini
+	if make.build_args['-f'] == '':
+		ini = os.getcwd() + "/" + glb.build_ini
+	else:
+		ini = make.build_args['-f']
 	build_ini.parse(ini)
 	make.do_makes()
 

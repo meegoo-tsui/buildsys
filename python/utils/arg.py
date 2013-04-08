@@ -24,6 +24,7 @@ class arg:
 		printf.printf(3, '''
 Options:
 -h | --help  print help info
+-f           ini file path(default: build.ini)
 -c           make clean
 -m           make
 -i           make install
@@ -38,18 +39,20 @@ default      make clean, make, make install
 	def build_args(self):
 		printf.status("parse args ...")
 		try:
-			opts, args = getopt.getopt(sys.argv[1:], "hcmix:lo:", ["help"])
+			opts, args = getopt.getopt(sys.argv[1:], "hf:cmix:lo:", ["help"])
 		except getopt.GetoptError , err:
 			printf.warn(str(err)) # will print something like "option -a not recognized"
 			self.build_usage()
 			sys.exit(1)
 
 		## build参数字典
-		build_args = {'-c':0, '-m':0, '-i':0, '-x':'', '-l':'', '-o':''} # 默认为非法参数
+		build_args = {'-f':'', '-c':0, '-m':0, '-i':0, '-x':'', '-l':'', '-o':''} # 默认为非法参数
 		for o, a in opts:
 			if   o in ("-h", "--help"):
 				self.build_usage()
 				sys.exit(1)
+			elif o == "-f":
+				build_args[o] = a
 			elif o == "-c":
 				build_args[o] = 1
 			elif o == "-m":
