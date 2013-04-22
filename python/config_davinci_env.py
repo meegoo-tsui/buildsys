@@ -24,7 +24,7 @@ from utils.env      import env
 ## .bashrc文件路径。
 env_file = os.path.expandvars("$HOME/.bashrc")
 ## 修改标志字符串。
-env_flag = "# Configure dm814x dev ENV"
+env_flag = "# Configure davinci dev ENV"
 ## 添加内容。
 env_content = \
   "\n#" + ">"*79 + "\n" + env_flag + "\n" + \
