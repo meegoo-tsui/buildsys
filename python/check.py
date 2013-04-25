@@ -26,7 +26,7 @@ def main():
 
 	# check out the project
 	check_repos.check_args = arg.check_args()
-	ini = os.getcwd() + "/" + check_repos.check_args['-f']
+	ini = check_repos.check_args['-f']
 	check_repos.check_out(ini)
 
 	# end patch
