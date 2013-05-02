@@ -42,7 +42,7 @@ env_content = \
   "\n# DM814x dev ENV\n" + \
   "export DM814X_DEV=" + env.home + "/workspace/local/dm814x/dm814x-dev.git\n" + \
   "export PATH=$DM814X_DEV/bin:$PATH\n" + \
-  "export DM814X_EZSDKREV=dm814x-ezsdk5.5.2.0\n" + \
+  "export DM814X_EZSDKREV=dm814x-ezsdk_5_05_02_00\n" + \
   "export DM814X_PSPREV=04.04.00.02\n" + \
   "export DM814X_PKG=EZSDK # EZSDK or PSP\n" + \
   "export DM814X_TARGET_NAME=dm814x\n" + \
