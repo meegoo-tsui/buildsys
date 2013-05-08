@@ -18,9 +18,9 @@ fi
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 if [ "$1" == "-u" ]; then
-	check.py -f $WORKSPACE/local/gitosis-admin.git/aee-all.ini -u
+	check.py -f $WORKSPACE/local/gitosis-admin.git/davinci-all.ini -u
 elif [ "$1" == "-s" ]; then
-	check.py -f $WORKSPACE/local/gitosis-admin.git/aee-all-mirror.ini -u
+	check.py -f $WORKSPACE/local/gitosis-admin.git/davinci-all-mirror.ini -u
 else
 	help
 fi
