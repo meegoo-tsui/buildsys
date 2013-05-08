@@ -43,13 +43,12 @@ env_content = \
   "export DM814X_DEV=" + env.home + "/workspace/local/dm814x/dm814x-dev.git\n" + \
   "export PATH=$DM814X_DEV/bin:$PATH\n" + \
   "export DM814X_EZSDKREV=dm814x-ezsdk_5_05_02_00\n" + \
-  "export DM814X_PSPREV=04.04.00.02\n" + \
-  "export DM814X_PKG=EZSDK # EZSDK or PSP\n" + \
   "export DM814X_TARGET_NAME=dm814x\n" + \
   "export DM814X_TARGET_PROMPT=TI8148_EVM#\n" + \
   "\n# DM646x dev ENV\n" + \
   "export DM646X_DEV=" + env.home + "/workspace/local/dm646x/dm646x-dev.git\n" + \
   "export PATH=$DM646X_DEV/bin:$PATH\n" + \
+  "export DM646X_DVSDKREV=dm646x-dvsdk3.10.0.19\n" + \
   "export DM646X_TARGET_NAME=dm646x\n" + \
   "export DM646X_TARGET_PROMPT=TI646_EVM#\n" + \
   "#" + "<"*79 + "\n"
