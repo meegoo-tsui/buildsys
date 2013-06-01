@@ -3,13 +3,13 @@
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 help()
 {
-	print_color.sh -g "Usage:"
-	print_color.sh -g "$0 -u"
-	print_color.sh -g "  checkout and update local"
-	print_color.sh -g "$0 -s"
-	print_color.sh -g "  checkout and update mirror"
-	print_color.sh -g "$0 -d"
-	print_color.sh -g "  checkout and update mirror dev"
+	print-color.sh -g "Usage:"
+	print-color.sh -g "$0 -u"
+	print-color.sh -g "  checkout and update local"
+	print-color.sh -g "$0 -s"
+	print-color.sh -g "  checkout and update mirror"
+	print-color.sh -g "$0 -d"
+	print-color.sh -g "  checkout and update mirror dev"
 	exit 1
 }
 
