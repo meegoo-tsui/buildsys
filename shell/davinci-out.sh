@@ -25,6 +25,12 @@ elif [ "$1" == "-s" ]; then
 	check.py -f $WORKSPACE/local/gitosis-admin.git/davinci-all-mirror.ini -u
 elif [ "$1" == "-d" ]; then
 	check.py -f $WORKSPACE/local/gitosis-admin.git/davinci-dev-mirror.ini -u
+	cd $WORKSPACE
+	if [ -d mirror-dev ]; then
+		timestamp=`date +"%Y-%m-%d"`
+		tar -jcf mirror-dev-$timestamp.tar.bz2 mirror-dev
+	fi
+	cd -
 else
 	help
 fi

@@ -40,7 +40,7 @@ env_content = \
   "\n# ARM GCC\n" + \
   "export PATH=/opt/arm-2009q1-203-arm-none-linux-gnueabi/bin:$PATH\n" + \
   "\n# DM814x dev ENV\n" + \
-  "export DM814X_DEV=" + env.home + "/workspace/local/dm814x/dm814x-dev.git\n" + \
+  "export DM814X_DEV=$WORKSPACE/local/dm814x/dm814x-dev.git\n" + \
   "export PATH=$DM814X_DEV/bin:$PATH\n" + \
   "export DM814X_EZSDKREV=dm814x-ezsdk_5_05_02_00\n" + \
   "export DM814X_TARGET_NAME=dm814x\n" + \
