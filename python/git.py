@@ -98,32 +98,29 @@ def main():
 			os.system("git --no-pager log --max-count=1")
 		else:
 			n = 1
-			for r in os.walk(current_path).next()[1]:
-				printf.silence("\n" + "+"*80)
-				printf.silence(str(n) + " - " + r)
-				path.change(current_path + "/" + r)
-				n = n + 1
-				if(not os.path.exists(".git")):
-					printf.warn("Not a git repos - " + r)
+			for root, dirs, files in os.walk(current_path):	
+				if '.git' in dirs:
+					del dirs[:]
+					printf.silence("\n" + "+"*80)
+					printf.silence(str(n) + " - " + root)
+					n = n + 1
+					path.change(root)
+					info = os.popen("git status -s | grep '^ M' | awk '{print $2}'").read()
+					if(info != ""):
+						printf.silence("-m:")
+						printf.printf(1, info)
+
+					info = os.popen("git status -s | grep '^ D' | awk '{print $2}'").read()
+					if(info != ""):
+						printf.silence("-d:")
+						printf.printf(1, info)
+
+					info = os.popen("git status -s | grep '^??' | awk '{print $2}'").read()
+					if(info != ""):
+						printf.silence("-o:")
+						printf.printf(1, info)
+					cmd.do("git status")					
 					path.change(current_path)
-					continue
-
-				info = os.popen("git status -s | grep '^ M' | awk '{print $2}'").read()
-				if(info != ""):
-					printf.silence("-m:")
-					printf.printf(3, info)
-
-				info = os.popen("git status -s | grep '^ D' | awk '{print $2}'").read()
-				if(info != ""):
-					printf.silence("-d:")
-					printf.printf(3, info)
-
-				info = os.popen("git status -s | grep '^??' | awk '{print $2}'").read()
-				if(info != ""):
-					printf.silence("-o:")
-					printf.printf(3, info)
-				cmd.do("git status")
-				path.change(current_path)		
 
 	#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	elif git_args['-r'] == "true":
