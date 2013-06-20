@@ -38,7 +38,7 @@ env_content = \
   "export GATE_IP="    + '.'.join(str(x) for x in env.hostip().split(".")[:-1])  + ".1\n"  + \
   "export MASK_IP=255.255.255.0\n" + \
   "\n# ARM GCC\n" + \
-  "export PATH=/opt/arm-2009q1-203-arm-none-linux-gnueabi/bin:$PATH\n" + \
+  "export PATH=/opt/arm-2009q1-203/bin:$PATH\n" + \
   "\n# DM814x dev ENV\n" + \
   "export DM814X_DEV=$WORKSPACE/local/dm814x/dm814x-dev.git\n" + \
   "export PATH=$DM814X_DEV/bin:$PATH\n" + \
