@@ -11,10 +11,10 @@ if [ -d ${GIT_PATH}/${REPOS_NAME} ];then
 	cd ${GIT_PATH}/${REPOS_NAME}/..
 	cmd="sudo tar -jcf ${PWD_PATH}/${REPOS_NAME}.${TIMESTAMP}.tar.bz2 ${REPOS_NAME}"
 	print-color.sh -g "$cmd"
-	exec $cmd
+	$cmd
 	cmd="sudo chown ${USER}:${USER} ${PWD_PATH}/${REPOS_NAME}.${TIMESTAMP}.tar.bz2"
 	print-color.sh -g "$cmd"
-	exec $cmd
+	$cmd
 	cd -
 else
 	print-color.sh -r "Error path: ${GIT_PATH}/${REPOS_NAME}"
