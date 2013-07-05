@@ -45,6 +45,9 @@ env_content = \
   "export DM814X_SDK=ezsdk_5_05_02_00\n" + \
   "export DM814X_TARGET_NAME=dm814x\n" + \
   "export DM814X_TARGET_PROMPT=TI8148_EVM#\n" + \
+  "if [ -f $DM814X_DEV/rules/environment-setup ]; then\n" + \
+  "	. $DM814X_DEV/rules/environment-setup\n" + \
+  "fi\n" + \
   "\n# DM365 dev ENV\n" + \
   "export DM365_DEV=" + env.home + "/workspace/local/dm365/dm365-dev.git\n" + \
   "export PATH=$DM365_DEV/bin:$PATH\n" + \
