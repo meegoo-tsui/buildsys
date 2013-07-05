@@ -14,27 +14,28 @@ if [ ! -f .git/config.bak ]; then
 fi
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-if [ $# != 1 ]; then
+if [ $# != 2 ]; then
 	print-color.sh -g "Usage:"
-	print-color.sh -g "$0 192.168.1.10:qt.git"
+	print-color.sh -g "$0 git@192.168.1.10:qt.git server"
 	exit 1
 fi
+server=$2
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-for remote in `git config -l | grep ^remote.local`; do
+for remote in `git config -l | grep ^remote.$server`; do
 	print-color.sh -g $remote
 done
 if [ "$remote" == "" ]; then
-	git remote add local git@$1
+	git remote add $server $1
 fi
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-for push in `git config -l | grep ^remote.local.push`; do
+for push in `git config -l | grep ^remote.$server.push`; do
 	print-color.sh -g $push
 done
 if [ "$push" == "" ]; then
-	git config --add remote.local.push '+refs/heads/*:refs/heads/*'
-	git config --add remote.local.push '+refs/tags/*:refs/tags/*'
+	git config --add remote.$server.push '+refs/heads/*:refs/heads/*'
+	git config --add remote.$server.push '+refs/tags/*:refs/tags/*'
 fi
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

@@ -338,22 +338,23 @@ Options:
 Options:
 -h | --help  print help info
 -u           new url
--p           print ini
+-p           print ini(use for gitosis.conf)
+-n           server name(default is server)
 example:
-	git_add_remote.py -u 192.168.1.10:github/
+	git_add_remote.py -u git@192.168.1.10:github/ -n server
 ''')
 
 	#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	## git_add_remote.py args
 	def git_add_remote_args(self):
 		try:
-			opts, args = getopt.getopt(sys.argv[1:], "hu:p", ["help"])
+			opts, args = getopt.getopt(sys.argv[1:], "hu:pn:", ["help"])
 		except getopt.GetoptError , err:
 			printf.warn(str(err)) # will print something like "option -a not recognized"
 			self.git_add_remote_usage()
 			sys.exit(1)
 
-		git_add_remote_args = {'-u':'', '-p':''} # 默认为非法参数
+		git_add_remote_args = {'-u':'', '-p':'', '-n':'server'} # 默认为非法参数
 		for o, a in opts:
 			if   o in ("-h", "--help"):
 				self.git_add_remote_usage()
@@ -362,6 +363,8 @@ example:
 				git_add_remote_args[o] = a
 			elif o == "-p":
 				git_add_remote_args[o] = "true"
+			elif o == "-n":
+				git_add_remote_args[o] = a
 		if git_add_remote_args['-u'] == "":
 			self.git_add_remote_usage()
 			sys.exit(1)		

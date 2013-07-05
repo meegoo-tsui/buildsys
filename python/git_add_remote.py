@@ -43,7 +43,7 @@ def main():
         # push to new remote
         path.push()
         path.change(r)
-        command = "git-push-local.sh " + git_add_remote_args['-u'] + r
+        command = "git-push-server.sh " + git_add_remote_args['-u'] + r + " " + git_add_remote_args['-n']
         cmd.do(command)
         path.pop()
 
