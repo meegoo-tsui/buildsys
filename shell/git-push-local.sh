@@ -49,6 +49,5 @@ for branch in `git branch -a --no-merged | grep remotes | grep -v HEAD | grep -v
 done
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-git push local
 exit 0
 

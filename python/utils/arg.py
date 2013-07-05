@@ -179,6 +179,53 @@ Options:
 		return check_args
 
 	#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	## 工具upload.py的帮助信息。
+	def upload_usage(self):
+		printf.printf(3, "Usage:\n" + "upload.py " + "[options]")
+		printf.printf(3, '''
+Options:
+-h | --help  help info
+-f           file path - must
+-l           list all repos
+-n           repos name(default is server)
+''')
+
+	#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	## 工具upload.py的解析参数。
+	def upload_args(self):
+		printf.status("parse args ...")
+		try:
+			opts, args = getopt.getopt(sys.argv[1:], "hf:ln:", ["help"])
+		except getopt.GetoptError , err:
+			printf.warn(str(err)) # will print something like "option -a not recognized"
+			self.upload_usage()
+			sys.exit(1)
+
+		## upload参数字典，ini路径
+		upload_args = {'-f':'', '-l':'' , '-n':'server'} # 默认为非法参数
+		for o, a in opts:
+			if   o in ("-h", "--help"):
+				self.upload_usage()
+				sys.exit(1)
+			elif o == "-f":
+				upload_args[o] = a
+			elif o == "-l":
+				upload_args[o] = "true"
+			elif o == "-n":
+				upload_args[o] = a
+			else:
+				assert False, "unhandled option"
+				self.upload_usage()
+				sys.exit(1)
+
+		# 判断参数
+		if upload_args['-f'] == "":
+			self.upload_usage()
+			sys.exit(1)
+
+		return upload_args
+
+	#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	## 工具svn.py或git.py的帮助信息。
 	def repos_usage(self, repos):
 		printf.printf(3, "Usage:\n" + repos + ".py " + "[options]")

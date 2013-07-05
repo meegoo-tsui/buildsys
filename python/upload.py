@@ -2,10 +2,10 @@
 #coding=utf-8
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-## @file    check.py
-#  @brief   下载工具，check out相关动作。
+## @file    upload.py
+#  @brief   upload git repos。
 #  @author  meegoo.tsui@gmail.com
-#  @date    2012/08/09
+#  @date    2013/07/05
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 import os, sys
@@ -14,24 +14,24 @@ import os, sys
 from   utils.printf         import printf
 from   utils.time           import time
 from   utils.arg            import arg
-from   utils.check_repos    import check_repos
+from   utils.upload_repos   import upload_repos
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## main function.
 def main():
 
-	# start check
+	# start upload
 	printf.reset()
 	time.push(os.path.abspath(__file__))
 
 	# check out the project
-	check_repos.check_args = arg.check_args()
-	ini = check_repos.check_args['-f']
-	check_repos.check_out(ini)
+	upload_repos.upload_args = arg.upload_args()
+	ini = upload_repos.upload_args['-f']
+	upload_repos.upload(ini)
 
-	# end check
+	# end upload
 	time.pop()
-	printf.silence("check out done.")
+	printf.silence("upload done.")
 	sys.exit(0)
 
 if __name__ == '__main__':
