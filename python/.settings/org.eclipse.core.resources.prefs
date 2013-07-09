@@ -18,6 +18,7 @@ encoding/check.py=utf-8
 encoding/config_buildsys_env.py=utf-8
 encoding/config_davinci_env.py=utf-8
 encoding/config_dm814x_env.py=utf-8
+encoding/deploy_html.py=utf-8
 encoding/git.py=utf-8
 encoding/git_add_remote.py=utf-8
 encoding/links.py=utf-8
