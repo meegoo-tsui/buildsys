@@ -10,6 +10,7 @@
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 import smtplib
 from   email.mime.text import MIMEText
+from   email.mime.multipart import MIMEMultipart
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## send mail.
@@ -39,12 +40,13 @@ class send:
         smtpserver.starttls()
         smtpserver.ehlo
         smtpserver.login(self.me, self.pwd)
-
-        msg            = MIMEText(self.info)
+        
+        msg            = MIMEMultipart('alternative')
         msg['Subject'] = self.subject
         msg['From']    = self.me
-        msg['To']      = self.to
-
+        msg['To']      = "亲的"
+        HTML_BODY      = MIMEText(self.info, 'html')
+        msg.attach(HTML_BODY)
         smtpserver.sendmail(self.me, [self.to], msg.as_string())
         smtpserver.quit()
 
