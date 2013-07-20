@@ -37,6 +37,7 @@ class send:
     ## send
     def send(self):
         smtpserver = smtplib.SMTP(self.smtp, self.port)
+        smtpserver.set_debuglevel(True)
         printf.status("smtpserver - ehlo")
         smtpserver.ehlo()
         printf.status("smtpserver - starttls")

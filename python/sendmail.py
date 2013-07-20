@@ -51,8 +51,8 @@ def main():
 		send.to      = number.name_array[pos0:pos1]
 		send.me      = data.me[current]
 		send.pwd     = data.pwd
-		send.smtp    = data.smtp
-		send.port    = data.port
+		send.smtp    = data.smtp[current]
+		send.port    = data.port[current]
 		send.subject = data.subject
 		send.info    = data.info
 		printf.status(data.me[current])
