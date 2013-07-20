@@ -16,6 +16,7 @@ sys.path.append(os.environ['BUILD_SYS_PATH'] + "/python")
 from   utils.printf         import printf
 from   utils.send           import send
 from   utils.time           import time
+from   utils.cmd            import cmd
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 sys.path.append(os.environ['PWD'])
@@ -30,10 +31,13 @@ def main():
 	time.push(os.path.abspath(__file__))
 
 	# loop send mail
+	current = 0
 	scnt    = 0
 	fcnt    = 0
 	onetime = 16
 	maxcnt  = number.array_len/onetime
+	cmd.do("rm -f number.py*")
+	cmd.do("random_number.py")
 	fp = open("send_done", 'w')
 	fp.close()
 	while 1:
@@ -44,24 +48,28 @@ def main():
 		if pos1 > number.array_len:
 			pos1 = number.array_len
 		send.to      = number.name_array[pos0:pos1]
-		send.me      = data.me
+		send.me      = data.me[current]
 		send.pwd     = data.pwd
 		send.smtp    = data.smtp
 		send.port    = data.port
 		send.subject = data.subject
 		send.info    = data.info
+		printf.status(data.me[current])
 		try:
 			send.send()
 			scnt = scnt + 1
 			printf.status("sucess to send - " + str(scnt))
+			printf.status("fail to send - " + str(fcnt))
 			fp = open("send_done", 'a')
 			fp.write(str(scnt) + " - " + str(send.to) + "\n")
 			fp.close()
-			systime.sleep(300)
 		except:
 			fcnt = fcnt + 1
+			current = current + 1  # change email user name
+			if current >= len(data.me):
+				break
+			printf.warn("sucess to send - " + str(scnt))
 			printf.warn("fail to send - " + str(fcnt))
-			systime.sleep(600)
 
 	# end send
 	fp.close()
