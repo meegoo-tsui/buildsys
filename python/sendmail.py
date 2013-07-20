@@ -35,6 +35,7 @@ def main():
 	onetime = 16
 	maxcnt  = number.array_len/onetime
 	fp = open("send_done", 'w')
+	fp.close()
 	while 1:
 		if scnt > maxcnt:
 			break
@@ -51,13 +52,16 @@ def main():
 		send.info    = data.info
 		try:
 			send.send()
-			fp.write(str(scnt) + " - " + str(send.to) + "\n")
 			scnt = scnt + 1
 			printf.status("sucess to send - " + str(scnt))
+			fp = open("send_done", 'a')
+			fp.write(str(scnt) + " - " + str(send.to) + "\n")
+			fp.close()
+			systime.sleep(300)
 		except:
 			fcnt = fcnt + 1
 			printf.warn("fail to send - " + str(fcnt))
-			systime.sleep(100)
+			systime.sleep(600)
 
 	# end send
 	fp.close()
