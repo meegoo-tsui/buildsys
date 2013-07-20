@@ -21,13 +21,13 @@ from   utils.cmd            import cmd
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 sys.path.append(os.environ['PWD'])
 import data
-import number
 
 ################################################################################
 # Main Function
 def main():
 	# start send
 	printf.reset()
+	
 	time.push(os.path.abspath(__file__))
 
 	# loop send mail
@@ -35,11 +35,12 @@ def main():
 	scnt    = 0
 	fcnt    = 0
 	onetime = 16
-	maxcnt  = number.array_len/onetime
 	cmd.do("rm -f number.py*")
 	cmd.do("random_number.py")
 	fp = open("send_done", 'w')
 	fp.close()
+	import number
+	maxcnt  = number.array_len/onetime
 	while 1:
 		if scnt > maxcnt:
 			break
@@ -67,9 +68,10 @@ def main():
 			fcnt = fcnt + 1
 			current = current + 1  # change email user name
 			if current >= len(data.me):
-				break
+				current = 0 # again
 			printf.warn("sucess to send - " + str(scnt))
 			printf.warn("fail to send - " + str(fcnt))
+			systime.sleep(3)
 
 	# end send
 	fp.close()
