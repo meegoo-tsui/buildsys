@@ -28,8 +28,8 @@ env_flag = "# Configure davinci dev ENV"
 ## 添加内容。
 env_content = \
   "\n#" + ">"*79 + "\n" + env_flag + "\n" + \
-  "export EXE_INSTALL="   + env.home + "/install\n" + \
-  "export SERVER_IP=192.168.1.10 # git和svn托管服务器\n" + \
+  "export EXE_INSTALL=$WORKSPACE/install\n" + \
+  "export SERVER_IP=192.168.0.239 # git和svn托管服务器\n" + \
   "export TFTPBOOT=/tftpboot\n" + \
   "export NFSBOOT=$EXE_INSTALL/nfsboot\n" + \
   "export TARGET_MAC=" + ':'.join(str(x) for x in env.hostmac().split(":")[:-1]) + ":03\n" + \
@@ -37,10 +37,8 @@ env_content = \
   "export HOST_IP="    + env.hostip() + "\n" + \
   "export GATE_IP="    + '.'.join(str(x) for x in env.hostip().split(".")[:-1])  + ".1\n"  + \
   "export MASK_IP=255.255.255.0\n" + \
-  "\n# ARM GCC\n" + \
-  "export PATH=/opt/arm-2009q1-203/bin:$PATH\n" + \
   "\n# DM814x dev ENV\n" + \
-  "export DM814X_DEV=$WORKSPACE/local/dm814x/dm814x-dev.git\n" + \
+  "export DM814X_DEV=$WORKSPACE/dm814x-dev.git\n" + \
   "export PATH=$DM814X_DEV/bin:$PATH\n" + \
   "export DM814X_SDK=ezsdk_5_05_02_00\n" + \
   "export DM814X_TARGET_NAME=dm814x\n" + \
@@ -48,12 +46,8 @@ env_content = \
   "if [ -f $DM814X_DEV/rules/environment-setup ]; then\n" + \
   "	. $DM814X_DEV/rules/environment-setup\n" + \
   "fi\n" + \
-  "\n# DM365 dev ENV\n" + \
-  "export DM365_DEV=" + env.home + "/workspace/local/dm365/dm365-dev.git\n" + \
-  "export PATH=$DM365_DEV/bin:$PATH\n" + \
-  "export DM365_SDK=dvsdk_4_02_00_06\n" + \
-  "export DM365_TARGET_NAME=dm365\n" + \
-  "export DM365_TARGET_PROMPT=TI365_EVM#\n" + \
+  "\n# ARM GCC\n" + \
+  "export PATH=/opt/arm-2009q1-203/bin:$PATH\n" + \
   "#" + "<"*79 + "\n"
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
