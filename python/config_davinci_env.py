@@ -29,7 +29,7 @@ env_flag = "# Configure davinci dev ENV"
 env_content = \
   "\n#" + ">"*79 + "\n" + env_flag + "\n" + \
   "export EXE_INSTALL=$WORKSPACE/install\n" + \
-  "export SERVER_IP=192.168.0.239 # git和svn托管服务器\n" + \
+  "export SERVER_IP=192.168.0.100 # git和svn托管服务器\n" + \
   "export TFTPBOOT=/tftpboot\n" + \
   "export NFSBOOT=$EXE_INSTALL/nfsboot\n" + \
   "export TARGET_MAC=" + ':'.join(str(x) for x in env.hostmac().split(":")[:-1]) + ":03\n" + \
@@ -46,8 +46,6 @@ env_content = \
   "if [ -f $DM814X_DEV/rules/environment-setup ]; then\n" + \
   "	. $DM814X_DEV/rules/environment-setup\n" + \
   "fi\n" + \
-  "\n# ARM GCC\n" + \
-  "export PATH=/opt/arm-2009q1-203/bin:$PATH\n" + \
   "#" + "<"*79 + "\n"
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
