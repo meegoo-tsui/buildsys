@@ -3,7 +3,7 @@
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 sdk=(ezsdk_5_05_02_00 ipnc_rdk_ga_release3.5.0 dvr_rdk_ga_release4.0.0 ti81xx-psp-04.04.00.02)
 len=${#sdk[*]}
-keyword=DM814X_SDK
+keyword=DAVINCI_SDK
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 current_sdk()
@@ -21,7 +21,7 @@ current_sdk()
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 get_choice()
 {
-	print-color.sh -g "Change dm814x SDK:"
+	print-color.sh -g "Change davinci SDK:"
 	for (( i=0; i<len; i++ ))
 		do 
 			echo "$i: ${sdk[$i]}"
@@ -37,7 +37,7 @@ get_choice()
 		print-color.sh -r "Error choice: $choice"
 		exit 1
 	fi
-	sed -i 's/DM814X_SDK.*/DM814X_SDK='"$new"'/g' ~/.bashrc
+	sed -i 's/DAVINCI_SDK.*/DAVINCI_SDK='"$new"'/g' ~/.bashrc
 }
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
