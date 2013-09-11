@@ -24,12 +24,12 @@ from utils.env      import env
 ## .bashrc文件路径。
 env_file = os.path.expandvars("$HOME/.bashrc")
 ## 修改标志字符串。
-env_flag = "# Configure davinci dev ENV"
+env_flag = "# Configure davinci dev"
 ## 添加内容。
 env_content = \
   "\n#" + ">"*79 + "\n" + env_flag + "\n" + \
   "export EXE_INSTALL=$WORKSPACE/install\n" + \
-  "export SERVER_IP=192.168.0.100 # git和svn托管服务器\n" + \
+  "export SERVER_IP=127.0.0.1 # git和svn托管服务器\n" + \
   "export TFTPBOOT=/tftpboot\n" + \
   "export NFSBOOT=$EXE_INSTALL/nfsboot\n" + \
   "export TARGET_MAC=" + ':'.join(str(x) for x in env.hostmac().split(":")[:-1]) + ":03\n" + \
@@ -37,14 +37,12 @@ env_content = \
   "export HOST_IP="    + env.hostip() + "\n" + \
   "export GATE_IP="    + '.'.join(str(x) for x in env.hostip().split(".")[:-1])  + ".1\n"  + \
   "export MASK_IP=255.255.255.0\n" + \
-  "\n# DM814x dev ENV\n" + \
-  "export DM814X_DEV=$WORKSPACE/dm814x-dev.git\n" + \
-  "export PATH=$DM814X_DEV/bin:$PATH\n" + \
-  "export DM814X_SDK=ezsdk_5_05_02_00\n" + \
-  "export DM814X_TARGET_NAME=dm814x\n" + \
-  "export DM814X_TARGET_PROMPT=TI8148_EVM#\n" + \
-  "if [ -f $DM814X_DEV/rules/environment-setup ]; then\n" + \
-  "	. $DM814X_DEV/rules/environment-setup\n" + \
+  "\n# davinci dev\n" + \
+  "export DAVINCI_DEV_PATH=$WORKSPACE/davinci-dev.git\n" + \
+  "export PATH=$DAVINCI_DEV_PATH/bin:$PATH\n" + \
+  "export DAVINCI_SDK=ipnc_rdk_ga_release3.5.0\n" + \
+  "if [ -f $DAVINCI_DEV_PATH/rules/environment-setup ]; then\n" + \
+  "	. $DAVINCI_DEV_PATH/rules/environment-setup\n" + \
   "fi\n" + \
   "#" + "<"*79 + "\n"
 
