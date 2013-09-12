@@ -35,6 +35,8 @@ class glb:
 		self.patch_flag     = "patch.done"
 		## 开源路径
 		self.repos          = "repos"
+		## 编译section判断标记，依据SDK判断
+		self.build_key      = "key+"
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## glb对象。

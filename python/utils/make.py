@@ -7,6 +7,9 @@
 #  @author  meegoo.tsui@gmail.com
 #  @date    2012/07/05
 
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+import os
+
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 from   utils.printf         import printf
 from   utils.glb            import glb
@@ -80,6 +83,12 @@ class make:
 				if self.build_args['-o'] != str(n):
 					printf.status("no need build!")
 					continue
+			# 判断是否有编译section关键字
+			if i[glb.project_name].find(glb.build_key) != -1:
+				if i[glb.project_name].find(os.environ['DAVINCI_SDK']) == -1:
+					printf.status("no need build!")
+					continue
+
 			project_path = i[glb.project_path]
 			path.push()
 			path.change(project_path)
