@@ -1,0 +1,11 @@
+[remote "pi"]
+	url = git@192.168.55.111:buildsys.git
+	fetch = +refs/heads/*:refs/remotes/mg/*
+	push = +refs/heads/*:refs/heads/*
+	push = +refs/tags/*:refs/tags/*
+[remote "mg"]
+	url = git@127.0.0.1:buildsys.git
+	fetch = +refs/heads/*:refs/remotes/mg/*
+	push = +refs/heads/*:refs/heads/*
+	push = +refs/tags/*:refs/tags/*
+
