@@ -1,0 +1,4 @@
+[gitweb]
+	owner = meegoo tsui <meegoo.tsui@gmail.com>
+	url   = git@$SERVER_IP:davinci/ipnc_rdk_ga_release3.5.0/board-support.git
+

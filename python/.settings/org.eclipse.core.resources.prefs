@@ -23,6 +23,7 @@ encoding/deploy_html.py=utf-8
 encoding/git.py=utf-8
 encoding/git_add_remote.py=utf-8
 encoding/links.py=utf-8
+encoding/ln_repos_config.py=utf-8
 encoding/mk_chk_ini.py=utf-8
 encoding/patch.py=utf-8
 encoding/random_number.py=utf-8
