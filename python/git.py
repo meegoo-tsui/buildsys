@@ -87,15 +87,9 @@ def main():
 		printf.status("repos status")
 		current_path = os.getcwd()
 		if(os.path.exists(".git")):
-			printf.status("Remote URL:")
-			os.system("git remote -v")
-			printf.status("Remote Branches: ")
-			os.system("git branch -r")
-			if os.path.isfile(".git/config"):
-				printf.status("== Configuration .git/config")
-				os.system("cat .git/config")
-				printf.status("== Most Recent Commit")
-			os.system("git --no-pager log --max-count=1")
+			printf.silence("\n" + "+"*80)
+			printf.silence(current_path)
+			cmd.do("git status")
 		else:
 			n = 1
 			for root, dirs, files in os.walk(current_path):	
