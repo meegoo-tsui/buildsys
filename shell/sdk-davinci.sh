@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-sdk=(ezsdk_5_05_02_00 ipnc_rdk_ga_release3.5.0 dvr_rdk_ga_release4.0.0 ti81xx-psp-04.04.00.02)
+sdk=(ipnc_rdk_ga_release3.5.0 dvr_rdk_ga_release4.0.0 ezsdk_5_05_02_00 ti81xx-psp-04.04.00.02)
 len=${#sdk[*]}
 keyword=DAVINCI_SDK
 
