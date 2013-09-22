@@ -31,6 +31,11 @@ print-color.sh -g "server: svn and git"
 sudo apt-get -y install apache2 subversion libapache2-svn python-subversion
 sudo apt-get -y install openssh-server openssh-client git python-setuptools
 
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+print-color.sh -g "usefull tools"
+sudo apt-get -y install vim
+
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 print-color.sh -g "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 print-color.sh -g "Install done."
 
