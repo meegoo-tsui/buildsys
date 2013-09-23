@@ -28,9 +28,9 @@ env_flag = "# Configure davinci dev"
 ## 添加内容。
 env_content = \
   "\n#" + ">"*79 + "\n" + env_flag + "\n" + \
-  "export EXE_INSTALL=$WORKSPACE/install\n" + \
+  "export EXE_INSTALL=/home/install/$USER\n" + \
   "export SERVER_IP=127.0.0.1 # git和svn托管服务器\n" + \
-  "export TFTPBOOT=/tftpboot\n" + \
+  "export TFTPBOOT=$EXE_INSTALL/tftpboot\n" + \
   "export NFSBOOT=$EXE_INSTALL/nfsboot\n" + \
   "export TARGET_MAC=" + ':'.join(str(x) for x in env.hostmac().split(":")[:-1]) + ":03\n" + \
   "export TARGET_IP="  + '.'.join(str(x) for x in env.hostip().split(".")[:-1])  + ".30\n" + \
