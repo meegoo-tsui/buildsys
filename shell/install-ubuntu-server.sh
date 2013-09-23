@@ -28,7 +28,7 @@ sudo apt-get -y install nfs-kernel-server
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 print-color.sh -g "server: svn and git"
-sudo apt-get -y install apache2 subversion libapache2-svn python-subversion
+sudo apt-get -y install apache2 subversion libapache2-svn python-subversion libapache2-mod-wsgi
 sudo apt-get -y install openssh-server openssh-client git python-setuptools gitweb
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
