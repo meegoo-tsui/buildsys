@@ -16,3 +16,6 @@ git config --global core.editor vim
 # global ignore
 git config --global core.excludesfile '~/.gitignore'
 
+echo "# buildsys"    > ~/.gitignore
+echo "buildsys.mak" >> ~/.gitignore
+

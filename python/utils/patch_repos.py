@@ -122,15 +122,6 @@ class patch_repos:
 		global patch_cmd
 		printf.silence("源码生成补丁 ...")
 		patch_cnt = 0
-		# 备份以前存在的补丁
-		if os.path.isdir(self.out_path):
-			patch_list_old = []
-			old_patchs = self.out_path + "/*" + glb.patch_filetype
-			patch_list_old.extend(glob.glob(old_patchs))
-			if len(patch_list_old) > 0:
-				patch_bak_path = self.out_path + "/" + time.timestamp()
-				cmd.do("mkdir -p " + patch_bak_path)
-				cmd.do("mv " + old_patchs + " " + patch_bak_path)
 
 		out_modify  = os.popen(patch_cmd['list_modify']).read()
 		# 判断是否需要对非托管文件打补丁
@@ -158,6 +149,16 @@ class patch_repos:
 			patch_cnt = patch_cnt + 1
 			name = self.out_path + "/" + "git-" + i.replace("/","_")
 			cmd.tryit("git diff /dev/null " + i + " > " + name + glb.patch_filetype)
+
+		# 备份新生成的补丁
+		if os.path.isdir(self.out_path):
+			patch_list_new = []
+			new_patchs = self.out_path + "/*" + glb.patch_filetype
+			patch_list_new.extend(glob.glob(new_patchs))
+			if len(patch_list_new) > 0:
+				patch_bak_path = self.out_path + "/" + time.timestamp()
+				cmd.do("mkdir -p " + patch_bak_path)
+				cmd.do("cp " + new_patchs + " " + patch_bak_path)
 
 		# 完成操作退出
 		printf.status("Total patch: " + str(patch_cnt))
@@ -194,12 +195,12 @@ class patch_repos:
 			# 设置源码路径
 			if not i.has_key(glb.source_path):
 				printf.warn("warnning: No source path !")
-				return
+				continue
 			self.in_path = i[glb.source_path]
 			# 设置补丁路径
 			if not i.has_key(glb.patch_path):
 				printf.warn("warnning: No patch path !")
-				return
+				continue
 			self.out_path = i[glb.patch_path]
 
 			# 创建补丁路径
@@ -213,7 +214,7 @@ class patch_repos:
 			# 读取repos类型
 			if not i.has_key(glb.source_repos):
 				printf.warn("warnning: No source repos !")
-				return
+				continue
 			# 设置仓库命令
 			self.top_path = self.in_path # 默认为根路径
 			if i[glb.source_repos] == "svn":
