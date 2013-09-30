@@ -9,6 +9,7 @@
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 import os, sys
+from   datetime import datetime
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 from   utils.printf         import printf
@@ -36,7 +37,7 @@ def main():
 
 	# end build
 	time.pop()
-	printf.silence("build done.")
+	printf.silence("[" + str(datetime.now()) + "]: build done.")
 	sys.exit(0)
 
 if __name__ == '__main__':
