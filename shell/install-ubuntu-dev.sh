@@ -11,7 +11,7 @@ sudo apt-get upgrade
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 print-color.sh -g "install dev tools ..."
-sudo apt-get -y install u-boot-tools bison flex
+sudo apt-get -y install u-boot-tools bison flex colordiff
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 print-color.sh -g "config ..."
