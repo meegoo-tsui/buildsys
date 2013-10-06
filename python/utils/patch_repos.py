@@ -9,6 +9,7 @@
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 import os, glob
+import codecs
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 from   utils.printf         import printf
@@ -125,9 +126,9 @@ class patch_repos:
 
 		# 生成单个补丁文件
 		repos_diff = self.out_path + "/" + self.ini_args[glb.source_repos] + ".diff"
-		fp = open(repos_diff, 'w')
+		fp = codecs.open("repos_diff", "w", "utf-8")
 		fp.close()
-		
+
 		out_modify  = os.popen(patch_cmd['list_modify']).read()
 		# 判断是否需要对非托管文件打补丁
 		if self.patch_args['-u'] == 0:
@@ -146,7 +147,7 @@ class patch_repos:
 			patch_cnt = patch_cnt + 1
 			name = self.out_path + "/" + self.ini_args[glb.source_repos] + "-" + i.replace("/","_") + glb.patch_filetype
 			cmd.do(patch_cmd['diff'] + " " + i + " > " + name)
-			cmd.do("cat " + name + " >> " + repos_diff)
+			cmd.do(patch_cmd['diff'] + " " + i + " >> " + repos_diff)
 
 		# 生成未托管文件补丁
 		patch_list = out_untrack.split("\n")
@@ -157,7 +158,7 @@ class patch_repos:
 			patch_cnt = patch_cnt + 1
 			name = self.out_path + "/" + "git-" + i.replace("/","_") + glb.patch_filetype
 			cmd.tryit("git diff /dev/null " + i + " > " + name)
-			cmd.do("cat " + name + " >> " + repos_diff)
+			cmd.tryit("git diff /dev/null " + i + " >> " + repos_diff)
 
 		# 备份新生成的补丁
 		if os.path.isdir(self.out_path):
