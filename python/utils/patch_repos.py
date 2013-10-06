@@ -123,6 +123,11 @@ class patch_repos:
 		printf.silence("源码生成补丁 ...")
 		patch_cnt = 0
 
+		# 生成单个补丁文件
+		repos_diff = self.out_path + "/" + self.ini_args[glb.source_repos] + ".diff"
+		fp = open(repos_diff, 'w')
+		fp.close()
+		
 		out_modify  = os.popen(patch_cmd['list_modify']).read()
 		# 判断是否需要对非托管文件打补丁
 		if self.patch_args['-u'] == 0:
@@ -131,14 +136,17 @@ class patch_repos:
 			out_untrack = os.popen(patch_cmd['list_untrack']).read()
 
 		# 生成修改文件补丁
+		cmd.do("rm -f " + self.out_path + "/*" + glb.patch_filetype) # 清除老补丁
+		cmd.do("rm -f " + self.out_path + "/*.diff") # 清除老补丁
 		patch_list = out_modify.split("\n")
 		printf.status("Modify files: " + str(len(patch_list) - 1))
 		for i in patch_list:
 			if i == "":
 				continue
 			patch_cnt = patch_cnt + 1
-			name = self.out_path + "/" + self.ini_args[glb.source_repos] + "-" + i.replace("/","_")
-			cmd.do(patch_cmd['diff'] + " " + i + " > " + name + glb.patch_filetype)
+			name = self.out_path + "/" + self.ini_args[glb.source_repos] + "-" + i.replace("/","_") + glb.patch_filetype
+			cmd.do(patch_cmd['diff'] + " " + i + " > " + name)
+			cmd.do("cat " + name + " >> " + repos_diff)
 
 		# 生成未托管文件补丁
 		patch_list = out_untrack.split("\n")
@@ -147,18 +155,21 @@ class patch_repos:
 			if i == "" or i.find(glb.patch_flag) != -1:
 				continue
 			patch_cnt = patch_cnt + 1
-			name = self.out_path + "/" + "git-" + i.replace("/","_")
-			cmd.tryit("git diff /dev/null " + i + " > " + name + glb.patch_filetype)
+			name = self.out_path + "/" + "git-" + i.replace("/","_") + glb.patch_filetype
+			cmd.tryit("git diff /dev/null " + i + " > " + name)
+			cmd.do("cat " + name + " >> " + repos_diff)
 
 		# 备份新生成的补丁
 		if os.path.isdir(self.out_path):
 			patch_list_new = []
 			new_patchs = self.out_path + "/*" + glb.patch_filetype
+			new_diff = self.out_path + "/*.diff"
 			patch_list_new.extend(glob.glob(new_patchs))
 			if len(patch_list_new) > 0:
 				patch_bak_path = self.out_path + "/" + time.timestamp()
 				cmd.do("mkdir -p " + patch_bak_path)
 				cmd.do("cp " + new_patchs + " " + patch_bak_path)
+				cmd.do("cp " + new_diff + " " + patch_bak_path)
 
 		# 完成操作退出
 		printf.status("Total patch: " + str(patch_cnt))
