@@ -31,6 +31,28 @@ class build_ini:
 		self.list_of_dict    = []
 
 	#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	## 递归： 多次扩展，无source.path在build.ini就扩展
+	def ini_expand(self, ini):
+		printf.status("expand ini to " + ini)
+		my_configIni = ConfigParser.ConfigParser()
+		fp = open(ini,"r")
+		my_configIni.readfp(fp)
+		fp.close()
+		for i in sorted(my_configIni.sections()):
+			build_ini_file = os.path.expandvars(my_configIni.get(i, glb.project_path) + "/" + glb.build_ini)
+			if my_configIni.has_option(i, glb.source_path):
+				## 初始化字典	
+				dictionary = {}
+				dictionary[glb.project_name] = i
+
+				## 读取所有option到字典
+				for j in my_configIni.options(i):
+					dictionary[j] = os.path.expandvars(my_configIni.get(i, j))
+				self.list_of_dict.append(dictionary)
+			else: # 无source.path扩展
+				self.ini_expand(build_ini_file)
+
+	#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	## parser of ini file
 	def parse(self, ini):
 		# judge ini exists
@@ -46,15 +68,7 @@ class build_ini:
 		fp.close()
 
 		# parse all sections
-		for i in sorted(self.configIni.sections()):
-			## 初始化字典	
-			dictionary = {}
-			dictionary[glb.project_name] = i
-
-			## 读取所有option到字典
-			for j in self.configIni.options(i):
-				dictionary[j] = os.path.expandvars(self.configIni.get(i, j))
-			self.list_of_dict.append(dictionary)
+		self.ini_expand(self.ini)
 
 		## 打印解析到的数据
 		n = 0
