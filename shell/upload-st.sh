@@ -1,9 +1,6 @@
 #!/bin/sh
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-. $BUILD_SYS_PATH/shell/utils/sdk.sh
-
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 exec_cmd()
 {
 	print-color.sh -g "$1"
@@ -18,18 +15,8 @@ if [ $# == 0 ]; then
 fi
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-if [ $# != 1 ] && [ "$2" == "all" ]; then
-	old_sdk=`echo ${!keyword}`
-	for (( i=0; i<len; i++ ))
-		do 
-			exec_cmd "export ${keyword}=${sdk[$i]}"
-			exec_cmd "upload.py -f $BUILD_SYS_PATH/shell/ini/davinci.ini -n $1"
-		done
-	exec_cmd "export ${keyword}=${old_sdk}"
-else
-	exec_cmd "upload.py -f $BUILD_SYS_PATH/shell/ini/davinci.ini -n $1"
-fi
-
+exec_cmd "upload.py -f $BUILD_SYS_PATH/shell/ini/st.ini -n $1"
 exit 0
+
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
