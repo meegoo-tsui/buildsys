@@ -38,7 +38,7 @@ env_content = \
   "export GATE_IP="    + '.'.join(str(x) for x in env.hostip().split(".")[:-1])  + ".1\n"  + \
   "export MASK_IP=255.255.255.0\n" + \
   "\n# davinci dev\n" + \
-  "export DAVINCI_DEV_PATH=$WORKSPACE/davinci-dev.git\n" + \
+  "export DAVINCI_DEV_PATH=$WORKSPACE/davinci/davinci-dev.git\n" + \
   "export PATH=$DAVINCI_DEV_PATH/bin:$PATH\n" + \
   "export DAVINCI_SDK=ipnc_rdk_ga_release3.5.0\n" + \
   "if [ -f $DAVINCI_DEV_PATH/rules/environment-setup ]; then\n" + \
