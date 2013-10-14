@@ -1,9 +1,9 @@
 #!/bin/sh
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-print-color.sh -g "  checkout and update local"
-check.py -f $BUILD_SYS_PATH/shell/ini/st.ini -u
+. $BUILD_SYS_PATH/shell/utils/base.sh
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+exec_cmd "check.py -f $BUILD_SYS_PATH/shell/ini/st.ini -u"
 exit 0
-
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 

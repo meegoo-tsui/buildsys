@@ -1,12 +1,14 @@
-#!/bin/sh
-
+#!/bin/bash
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-. $BUILD_SYS_PATH/shell/utils/sdk.sh
+#+ base.sh
+#+   base functions
+#+ author
+#+   meegoo.tsui@gmail.com, 2012-06-28
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-current_sdk
-get_choice
-current_sdk
-warning
-exit 0
+exec_cmd()
+{
+	print-color.sh -g "$1"
+	$1
+}
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
