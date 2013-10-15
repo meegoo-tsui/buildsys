@@ -47,7 +47,7 @@ class printf:
 
 	## printf warn info.
 	def warn(self, message):
-		self.printf(1, "<warn>\n\t" + message)
+		self.printf(3, "<warn>\n\t" + message)
 		return
 
 	## printf status info.
