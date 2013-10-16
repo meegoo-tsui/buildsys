@@ -25,6 +25,8 @@ class glb:
 		self.installe_path  = "install.path"
 		## build.ini参数 - 源码路径
 		self.source_path    = "source.path"
+		## 此路径下的非托管文件全部生成补丁，".h"、".c"、".cpp"、".mk"
+		self.source_all_path = "source.path.all"
 		## build.ini参数 - 源码托管(git, svn)
 		self.source_repos   = "source.repos"
 		## build.ini参数 - 补丁路径

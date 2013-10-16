@@ -35,6 +35,8 @@ class patch_repos:
 		self.patch_args = {}
 		## 源码路径
 		self.in_path    = ""
+		## 源码路径 - 此路径下的非托管文件全部生成补丁
+		self.in_all_path= []
 		## 补丁路径
 		self.out_path   = ""
 		## repos根目录
@@ -44,7 +46,7 @@ class patch_repos:
 		## git补丁命令
 		self.cmd_git    = {
 						    "list_modify":  "git status . -s | grep '^ M' | awk '{print $2}'", # 此命令仅显示当前目录下情况
-						    "list_untrack": "git status . -s | grep '^??' | awk '{print $2}'", # 此命令仅显示当前目录下情况
+						    "list_untrack": "git status . -s -u | grep '^??' | awk '{print $2}'", # 此命令仅显示当前目录下情况
 						    "diff":         "git diff",
 						    "level":        "  -p1 <  "
 						  }
@@ -126,13 +128,28 @@ class patch_repos:
 
 		# 生成单个补丁文件
 		repos_diff = self.out_path + "/" + self.ini_args[glb.source_repos] + ".diff"
-		fp = codecs.open("repos_diff", "w", "utf-8")
+		fp = codecs.open(repos_diff, "w", "utf-8")
 		fp.close()
 
 		out_modify  = os.popen(patch_cmd['list_modify']).read()
 		# 判断是否需要对非托管文件打补丁
+		out_untrack = ""
 		if self.patch_args['-u'] == 0:
-			out_untrack = ""
+			for i in self.in_all_path: # 指定非托管文件打补丁路径，".h"、".c"、".cpp"、".mk"
+				path.push()
+				path.change(i)
+				path_paste = i.replace(self.in_path + "/","")
+				out_untrack_all = os.popen(patch_cmd['list_untrack']).read()
+				path.pop()
+				for i in out_untrack_all.split("\n"):
+					if i == "":
+						continue
+					if i.upper().find(".H") == -1: # 文件过滤
+						if i.upper().find(".C") == -1:
+							if i.upper().find(".CPP") == -1:
+								if i.upper().find(".MK") == -1:
+									continue
+					out_untrack = out_untrack + path_paste + "/" + i + "\n"
 		else:
 			out_untrack = os.popen(patch_cmd['list_untrack']).read()
 
@@ -208,7 +225,14 @@ class patch_repos:
 			if not i.has_key(glb.source_path):
 				printf.warn("warnning: No source path !")
 				continue
-			self.in_path = i[glb.source_path]
+			self.in_path = os.path.abspath(i[glb.source_path])
+			# 设置源码路径 - 此路径下的非托管文件全部生成补丁
+			del self.in_all_path[:] # 清除上次的值
+			for key_search in i:
+				if key_search.find(glb.source_all_path) != -1:
+					value = i[key_search]
+					self.in_all_path.append(os.path.abspath(value))
+
 			# 设置补丁路径
 			if not i.has_key(glb.patch_path):
 				printf.warn("warnning: No patch path !")

@@ -39,7 +39,6 @@ class build_ini:
 		my_configIni.readfp(fp)
 		fp.close()
 		for i in sorted(my_configIni.sections()):
-			build_ini_file = os.path.expandvars(my_configIni.get(i, glb.project_path) + "/" + glb.build_ini)
 			if my_configIni.has_option(i, glb.source_path):
 				## 初始化字典	
 				dictionary = {}
@@ -50,6 +49,7 @@ class build_ini:
 					dictionary[j] = os.path.expandvars(my_configIni.get(i, j))
 				self.list_of_dict.append(dictionary)
 			else: # 无source.path扩展
+				build_ini_file = os.path.expandvars(my_configIni.get(i, glb.project_path) + "/" + glb.build_ini)
 				self.ini_expand(build_ini_file)
 
 	#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

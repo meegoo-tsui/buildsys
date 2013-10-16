@@ -1,16 +1,12 @@
 #!/bin/sh
 
-echo "save ..."
-set -e
-
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+. $BUILD_SYS_PATH/shell/utils/base.sh
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+reset
 if [ $# != 1 ]; then
-	CMD="patch.py -f build.ini -a 2"
-	echo $CMD
-	$CMD	
+	exec_cmd "patch.py -f build.ini -a 2"
 else
-	CMD="patch.py -f build.ini -a 2 -o $1"
-	echo $CMD
-	$CMD
+	exec_cmd "patch.py -f build.ini -a 2 -o $1"
 fi
-echo "save success."
 
