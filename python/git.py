@@ -54,7 +54,7 @@ def main():
 	elif git_args['-d'] == "true":
 		os.system("git status -s | grep '^ D' | awk '{print $2}'")
 	elif git_args['-o'] == "true":
-		os.system("git status -s | grep '^??' | awk '{print $2}'")
+		os.system("git status -s -u | grep '^??' | awk '{print $2}'")
 	
 	#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
 	elif git_args['-b'] == "true":
@@ -109,7 +109,7 @@ def main():
 						printf.silence("-d:")
 						printf.printf(1, info)
 
-					info = os.popen("git status -s | grep '^??' | awk '{print $2}'").read()
+					info = os.popen("git status -s -u | grep '^??' | awk '{print $2}'").read()
 					if(info != ""):
 						printf.silence("-o:")
 						printf.printf(1, info)
