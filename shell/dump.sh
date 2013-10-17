@@ -18,9 +18,6 @@ if [ $# -eq 0 ];then
 	exit 1
 fi
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-project=""
-all=""
-mirror=""
 args=`getopt -o p:am -l help -- "$@"`
 eval set -- $args
 for i;do
@@ -49,7 +46,7 @@ if [ "$project" == "davinci" ];then
 		exec_cmd "check.py -f $BUILD_SYS_PATH/shell/ini/${project}.ini -u $mirror"
 	fi
 else
-	print-color.sh -r "check.py -f $BUILD_SYS_PATH/shell/ini/${project}.ini $mirror -u"
+	exec_cmd "check.py -f $BUILD_SYS_PATH/shell/ini/${project}.ini $mirror -u"
 fi
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
