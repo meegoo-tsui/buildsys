@@ -34,7 +34,7 @@ if [ "$mirror" != "" ];then
 	exec_cmd "export WORKSPACE=/media/MEEGOO/workspace"
 fi
 if [ "$project" == "davinci" ];then
-	if [ all != "" ]; then
+	if [ "$all" != "" ]; then
 		old_sdk=`echo ${!keyword}`
 		for (( i=0; i<len; i++ ))
 			do 
