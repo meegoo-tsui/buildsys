@@ -108,8 +108,10 @@ class check_repos:
 					cmd.do("git remote update")
 				elif self.dict[i][1].find("git clone") != -1:
 					printf.silence("git repos")
-					# cmd.do("git reset --hard")
-					cmd.do("git pull")
+					if self.check_args['-m'] != "":
+						cmd.do("git remote update")
+					else:
+						cmd.do("git pull")
 				elif self.dict[i][1].find("svn co") != -1:
 					printf.silence("svn repos")
 					cmd.do("svn up")
@@ -120,7 +122,7 @@ class check_repos:
 				cmd.do("mkdir -p " + self.dict[i][0])
 				path.push()
 				path.change(self.dict[i][0])
-				cmd.do(self.dict[i][1])
+				cmd.do(self.dict[i][1] + " " + self.check_args['-m'])
 				path.pop()
 
 ## check对象.

@@ -1,6 +1,6 @@
 #!/bin/bash
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-#+ print_color.sh
+#+ print-color.sh
 #+   printf text with color
 #+ author
 #+   meegoo.tsui@gmail.com, 2012-06-28
@@ -11,13 +11,13 @@
 function print_help() 
 { 
 	echo "${txtgrn}usage:${txtrst}"
-	echo "${txtred}  print_color.sh -r "\"printf color - red\""   ${txtrst}"
-	echo "${txtgrn}  print_color.sh -g "\"printf color - green\"" ${txtrst}"
-	echo "${txtylw}  print_color.sh -y "\"printf color - yellow\""${txtrst}"
-	echo "${txtblu}  print_color.sh -b "\"printf color - blue\""  ${txtrst}"
-	echo "${txtpur}  print_color.sh -p "\"printf color - purple\""${txtrst}"
-	echo "${txtcyn}  print_color.sh -c "\"printf color - cyan\""  ${txtrst}"
-	echo "${txtwht}  print_color.sh -w "\"printf color - white\"" ${txtrst}"
+	echo "${txtred}  print-color.sh -r "\"printf color - red\""   ${txtrst}"
+	echo "${txtgrn}  print-color.sh -g "\"printf color - green\"" ${txtrst}"
+	echo "${txtylw}  print-color.sh -y "\"printf color - yellow\""${txtrst}"
+	echo "${txtblu}  print-color.sh -b "\"printf color - blue\""  ${txtrst}"
+	echo "${txtpur}  print-color.sh -p "\"printf color - purple\""${txtrst}"
+	echo "${txtcyn}  print-color.sh -c "\"printf color - cyan\""  ${txtrst}"
+	echo "${txtwht}  print-color.sh -w "\"printf color - white\"" ${txtrst}"
 	exit 1
 }
 

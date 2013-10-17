@@ -146,14 +146,14 @@ Options:
 	def check_args(self):
 		printf.status("parse args ...")
 		try:
-			opts, args = getopt.getopt(sys.argv[1:], "hf:lo:u", ["help"])
+			opts, args = getopt.getopt(sys.argv[1:], "hf:lo:um", ["help"])
 		except getopt.GetoptError , err:
 			printf.warn(str(err)) # will print something like "option -a not recognized"
 			self.check_usage()
 			sys.exit(1)
 
 		## check参数字典，ini路径
-		check_args = {'-f':'', '-l':'' , '-o':'', '-u':'false'} # 默认为非法参数
+		check_args = {'-f':'', '-l':'' , '-o':'', '-u':'false', '-m':''} # 默认为非法参数
 		for o, a in opts:
 			if   o in ("-h", "--help"):
 				self.check_usage()
@@ -166,6 +166,8 @@ Options:
 				check_args[o] = a
 			elif o == "-u":
 				check_args[o] = "true"
+			elif o == "-m":
+				check_args[o] = "--mirror"
 			else:
 				assert False, "unhandled option"
 				self.check_usage()
