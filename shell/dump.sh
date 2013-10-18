@@ -37,7 +37,7 @@ for i;do
 done
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 if [ "$mirror" != "" ];then
-	exec_cmd "export WORKSPACE=/media/MEEGOO/workspace"
+	exec_cmd "export WORKSPACE=/media/git/workspace"
 fi
 if [ "$project" == "davinci" ];then
 	if [ "$all" != "" ]; then
