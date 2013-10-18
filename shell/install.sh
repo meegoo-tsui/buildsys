@@ -58,16 +58,16 @@ if [ $# -eq 0 ];then
 	print_help
 fi
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-args=`getopt -o dp -l help server dev -- "$@"`
+args=`getopt -o "dph" -l "help,server,dev" -- "$@"`
 eval set -- $args
 for i;do
 	case $i in
-		-d) action="demo";shift 1;;
-		-p) action="project";shift 1;;
-		--server) action="server";shift 1;;
-		--dev) action="dev";shift 1;;
-		-h|--help)print_help;;
-		--)shift;;
+		-d)        action="demo";    shift 1;;
+		-p)        action="project"; shift 1;;
+		--server)  action="server";  shift 1;;
+		--dev)     action="dev";     shift 1;;
+		-h|--help) print_help;;
+		--)                          shift;;
 	esac
 done
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

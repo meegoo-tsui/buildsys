@@ -14,19 +14,25 @@ function print_help()
 	exit 1
 }
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+function do_dump()
+{
+	exec_cmd "check.py -f $BUILD_SYS_PATH/shell/ini/${1}.ini -u ${2}"
+}
+
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 if [ $# -eq 0 ];then
 	print_help
 fi
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-args=`getopt -o p:am -l help -- "$@"`
+args=`getopt -o "p:amh" -l "help" -- "$@"`
 eval set -- $args
 for i;do
 	case $i in
-		-p) project="$2";shift 2;;
-		-a) all="all";shift 1;;
-		-m) mirror="-m";shift 1;;
-		-h|--help)print_help;;
-		--)shift;;
+		-p)        project="$2"; shift 2;;
+		-a)        all="all";    shift 1;;
+		-m)        mirror="-m";  shift 1;;
+		-h|--help) print_help;;
+		--)                      shift;;
 	esac
 done
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -39,14 +45,14 @@ if [ "$project" == "davinci" ];then
 		for (( i=0; i<len; i++ ))
 			do 
 				exec_cmd "export ${keyword}=${sdk[$i]}"
-				exec_cmd "check.py -f $BUILD_SYS_PATH/shell/ini/${project}.ini -u $mirror"
+				do_dump ${project} ${mirror}
 			done
 			exec_cmd "export ${keyword}=${old_sdk}"
 	else
-		exec_cmd "check.py -f $BUILD_SYS_PATH/shell/ini/${project}.ini -u $mirror"
+		do_dump ${project} ${mirror}
 	fi
 else
-	exec_cmd "check.py -f $BUILD_SYS_PATH/shell/ini/${project}.ini $mirror -u"
+	do_dump ${project} ${mirror}
 fi
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 

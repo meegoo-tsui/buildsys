@@ -56,17 +56,17 @@ if [ $# -eq 0 ];then
 	print_help
 fi
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-args=`getopt -o pcsblo: -l help -- "$@"`
+args=`getopt -o "pcsblo:h" -l "help" -- "$@"`
 eval set -- $args
 for i;do
 	case $i in
-		-p) action="on";shift 1;;
-		-c) action="clean";shift 1;;
-		-s) action="save";shift 1;;
-		-b) action="build";shift 1;;
-		-o) only="$2";shift 2;;
-		-h|--help)print_help;;
-		--)shift;;
+		-p)        action="on";    shift 1;;
+		-c)        action="clean"; shift 1;;
+		-s)        action="save";  shift 1;;
+		-b)        action="build"; shift 1;;
+		-o)        only="$2";      shift 2;;
+		-h|--help) print_help;;
+		--)                        shift;;
 	esac
 done
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

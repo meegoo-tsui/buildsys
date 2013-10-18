@@ -15,20 +15,26 @@ function print_help()
 	exit 1
 }
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+function do_upload()
+{
+	exec_cmd "upload.py -f $BUILD_SYS_PATH/shell/ini/${1}.ini -n ${2}"
+}
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 if [ $# -eq 0 ];then
 	print_help
 fi
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-args=`getopt -o p:amn: -l help -- "$@"`
+args=`getopt -o "p:amn:h" -l "help" -- "$@"`
 eval set -- $args
 for i;do
 	case $i in
-		-p) project="$2";shift 2;;
-		-a) all="all";shift 1;;
-		-m) mirror="-m";shift 1;;
-		-n) name="$2";shift 2;;
-		-h|--help)print_help;;
-		--)shift;;
+		-p)        project="$2";  shift 2;;
+		-a)        all="all";     shift 1;;
+		-m)        mirror="-m";   shift 1;;
+		-n)        name="$2";     shift 2;;
+		-h|--help) print_help;;
+		--)                       shift;;
 	esac
 done
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -41,14 +47,14 @@ if [ "$project" == "davinci" ];then
 		for (( i=0; i<len; i++ ))
 			do 
 				exec_cmd "export ${keyword}=${sdk[$i]}"
-				exec_cmd "upload.py -f $BUILD_SYS_PATH/shell/ini/${project}.ini -n $name"
+				do_upload ${project} ${name}
 			done
 			exec_cmd "export ${keyword}=${old_sdk}"
 	else
-		exec_cmd "upload.py -f $BUILD_SYS_PATH/shell/ini/${project}.ini -n $name"
+		do_upload ${project} ${name}
 	fi
 else
-	exec_cmd "upload.py -f $BUILD_SYS_PATH/shell/ini/${project}.ini -n $name"
+	do_upload ${project} ${name}
 fi
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
