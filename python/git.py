@@ -89,7 +89,7 @@ def main():
 		if(os.path.exists(".git")):
 			printf.silence("\n" + "+"*80)
 			printf.silence(current_path)
-			cmd.do("git status")
+			cmd.do("git status -su")
 		else:
 			n = 1
 			for root, dirs, files in os.walk(current_path):	
@@ -109,11 +109,11 @@ def main():
 						printf.silence("-d:")
 						printf.printf(1, info)
 
-					info = os.popen("git status -s -u | grep '^??' | awk '{print $2}'").read()
+					info = os.popen("git status -su | grep '^??' | awk '{print $2}'").read()
 					if(info != ""):
 						printf.silence("-o:")
 						printf.printf(1, info)
-					cmd.do("git status")					
+					cmd.do("git status -su")					
 					path.change(current_path)
 
 	#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
