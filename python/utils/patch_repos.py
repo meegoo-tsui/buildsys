@@ -229,7 +229,7 @@ class patch_repos:
 			# 设置源码路径 - 此路径下的非托管文件全部生成补丁
 			del self.in_all_path[:] # 清除上次的值
 			for key_search in i:
-				if key_search.find(glb.source_all_path) != -1:
+				if key_search.find(glb.source_path_all) != -1:
 					value = i[key_search]
 					self.in_all_path.append(os.path.abspath(value))
 

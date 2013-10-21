@@ -26,7 +26,7 @@ class glb:
 		## build.ini参数 - 源码路径
 		self.source_path    = "source.path"
 		## 此路径下的非托管文件全部生成补丁，".h"、".c"、".cpp"、".mk"
-		self.source_all_path = "source.path.all"
+		self.source_path_all = "source.path.all"
 		## build.ini参数 - 源码托管(git, svn)
 		self.source_repos   = "source.repos"
 		## build.ini参数 - 补丁路径
@@ -38,7 +38,7 @@ class glb:
 		## 开源路径
 		self.repos          = "repos"
 		## 编译section判断标记，依据SDK判断
-		self.build_key      = "key+"
+		self.build_key      = "nobuild"
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## glb对象。
