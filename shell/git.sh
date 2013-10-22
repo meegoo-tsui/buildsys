@@ -13,7 +13,6 @@ function print_help()
 	print-color.sh -g "  -c     for git config env vars"
 	print-color.sh -g "  -m     for git mark nop file in nop folder"
 	print-color.sh -g "  -s     for git status"
-	print-color.sh -g "  --sdk  for git mark nop file in nop folder"
 	print-color.sh -g "  --push for gitrepo-to-another-server"
 	print-color.sh -g "  -u     for gitrepo-url"
 	print-color.sh -g "  -n     for gitrepo-server-name"	
@@ -68,14 +67,6 @@ function do_status()
 	exec_cmd "git.py -s -p $DAVINCI_DEV_PATH/../$DAVINCI_SDK"
 }
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-function do_sdk() 
-{
-	current_sdk
-	get_choice
-	current_sdk
-	warning
-}
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 function do_push() 
 {
 	# http://vxtindia.com/blog/how-to-migrate-github-repo-to-another-server-including-all-branches-and-tags/
@@ -127,7 +118,7 @@ if [ $# -eq 0 ];then
 	print_help
 fi
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-args=`getopt -o "bdcmsu:n:h" -l "help,sdk,push" -- "$@"`
+args=`getopt -o "bdcmsu:n:h" -l "help,push" -- "$@"`
 eval set -- $args
 for i;do
 	case $i in
@@ -136,7 +127,6 @@ for i;do
 		-c)         action="config";  shift 1;;
 		-m)         action="mark";    shift 1;;
 		-s)         action="status";  shift 1;;
-		--sdk)      action="sdk";     shift 1;;
 		--push)     action="push";    shift 1;;
 		-u)         url="$2";         shift 2;;
 		-n)         server="$2";      shift 2;;		
