@@ -8,7 +8,7 @@ set -e
 function print_help() 
 { 
 	print-color.sh -y "upload.sh:"
-	print-color.sh -g "  -p  for project name - davinci, st ..."
+	print-color.sh -g "  -p  for project name - davinci, st, admin ..."
 	print-color.sh -g "  -a  for all"
 	print-color.sh -g "  -m  for mirror"
 	print-color.sh -g "  -n  for name of server"
