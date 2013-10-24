@@ -14,6 +14,24 @@ function print_help()
 	exit 1
 }
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+function install_demo()
+{
+	if [ -d "$NFSBOOT/filesys-$PLATFORM" ];then
+		if [ -d "$EXE_INSTALL/$PLATFORM/demo" ];then
+			exec_cmd "cp -rf $EXE_INSTALL/$PLATFORM/demo/* $NFSBOOT/filesys-$PLATFORM"
+		fi
+	fi
+}
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+function install_project()
+{
+	if [ -d "$NFSBOOT/filesys-$PLATFORM" ];then
+		if [ -d "$EXE_INSTALL/$PLATFORM/project" ];then
+			exec_cmd "cp -rf $EXE_INSTALL/$PLATFORM/project/* $NFSBOOT/filesys-$PLATFORM"
+		fi
+	fi
+}
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 function install_server()
 {
 	exec_cmd "sudo apt-get update"
