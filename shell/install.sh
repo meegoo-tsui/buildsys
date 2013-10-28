@@ -55,7 +55,7 @@ function install_server()
 	exec_cmd "sudo apt-get -y install openssh-server openssh-client git python-setuptools gitweb highlight"
 
 	print-color.sh -y "usefull tools"
-	exec_cmd "sudo apt-get -y install vim gnome-schedule"
+	exec_cmd "sudo apt-get -y install vim gnome-schedule nautilus-open-terminal"
 }
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 function install_dev()
