@@ -1,6 +1,5 @@
 #/bin/sh
 
-reset
 set -e
 . $BUILD_SYS_PATH/shell/utils/base.sh
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -16,24 +15,25 @@ function print_help()
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 function install_demo()
 {
-	if [ -d "$NFSBOOT/filesys-$PLATFORM" ];then
-		if [ -d "$EXE_INSTALL/$PLATFORM/demo" ];then
-			exec_cmd "cp -rf $EXE_INSTALL/$PLATFORM/demo/* $NFSBOOT/filesys-$PLATFORM"
-		fi
+	if [ -d "$NFSBOOT/filesys-$PLATFORM" ] && [ -d "$EXE_INSTALL/$PLATFORM/demo" ];then
+		exec_cmd "cp -rf $EXE_INSTALL/$PLATFORM/demo/* $NFSBOOT/filesys-$PLATFORM"
+	else
+		print-color.sh -y "no folder - $EXE_INSTALL/$PLATFORM/demo"
 	fi
 }
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 function install_project()
 {
-	if [ -d "$NFSBOOT/filesys-$PLATFORM" ];then
-		if [ -d "$EXE_INSTALL/$PLATFORM/project" ];then
-			exec_cmd "cp -rf $EXE_INSTALL/$PLATFORM/project/* $NFSBOOT/filesys-$PLATFORM"
-		fi
+	if [ -d "$NFSBOOT/filesys-$PLATFORM" ] && [ -d "$EXE_INSTALL/$PLATFORM/project" ];then
+		exec_cmd "cp -rf $EXE_INSTALL/$PLATFORM/project/* $NFSBOOT/filesys-$PLATFORM"
+	else
+		print-color.sh -y "no folder - $EXE_INSTALL/$PLATFORM/project"
 	fi
 }
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 function install_server()
 {
+	reset
 	exec_cmd "sudo apt-get update"
 	exec_cmd "sudo apt-get upgrade"
 
@@ -60,6 +60,7 @@ function install_server()
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 function install_dev()
 {
+	reset
 	exec_cmd "sudo apt-get update"
 	exec_cmd "sudo apt-get upgrade"
 
