@@ -69,6 +69,7 @@ function install_dev()
 
 	print-color.sh -y "config ..."
 	exec_cmd "sudo ln -sf /bin/bash /bin/sh"
+	exec_cmd "sudo chmod +s /bin/mknod"
 }
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 if [ $# -eq 0 ];then
