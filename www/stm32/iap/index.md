@@ -5,9 +5,9 @@
 <p>
 <hr />
 
-*	终端工具： \\\\192.168.0.239\\飞行项目组资料共享\\开发类资料\\dm81xx\\tools\\SecureCRT7.0.rar
+*	终端工具： SecureCRT
 
-*	源码 - [http://192.168.0.239/gitweb/?p=repositories/stm32/stm32.git;a=summary](http://192.168.0.239/gitweb/?p=repositories/stm32/stm32.git;a=summary)
+*	源码 - [stm32.git](http://127.0.0.1/gitweb/?p=st/stm32.git;a=summary)
 
 *	IAP, 程序大小限制在0x3000, 应用程序的起始位置为0x3000, 需重定位中断向量表
 
