@@ -65,7 +65,7 @@ function install_dev()
 	exec_cmd "sudo apt-get upgrade"
 
 	print-color.sh -y "install dev tools ..."
-	exec_cmd "sudo apt-get -y install u-boot-tools bison flex colordiff"
+	exec_cmd "sudo apt-get -y install u-boot-tools bison flex colordiff libncurses5-dev"
 
 	print-color.sh -y "config ..."
 	exec_cmd "sudo ln -sf /bin/bash /bin/sh"
